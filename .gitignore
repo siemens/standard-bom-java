@@ -1,0 +1,31 @@
+# Gradle generated files
+/.gradle/
+/build/
+/_support/
+
+# IntelliJ control files
+/.idea/
+/out/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse control files
+/.project
+/.classpath
+/.settings/
+
+# VSCode
+bin/
+.vscode/
+
+# Files from the master branch (we don't want them on the 'pages' branch)
+/.gitattributes
+/src/
+/config/
+/README*
+/BOM-Format.md
+/gradle/
+/gradle*
+/*.gradle
+/LICENSE.*

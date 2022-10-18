@@ -1,0 +1,24 @@
+#
+# Copyright (c) Siemens AG 2019-2022 ALL RIGHTS RESERVED
+#
+
+# Gradle generated files
+/.gradle/
+/build/
+/bin/
+
+# IntelliJ control files
+/.idea/
+/out/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse control files
+/.project
+/.classpath
+/.settings/
+
+# VSCode control files
+.vscode/
+/_support/

@@ -1,0 +1,5 @@
+/*
+ * Copyright (c) Siemens AG 2019-2022 ALL RIGHTS RESERVED
+ */
+
+rootProject.name = 'standard-bom-java'

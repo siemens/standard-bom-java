@@ -23,7 +23,6 @@ bin/
 /.gitattributes
 /src/
 /config/
-/README*
 /BOM-Format.md
 /gradle/
 /gradle*

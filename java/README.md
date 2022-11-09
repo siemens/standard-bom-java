@@ -13,7 +13,7 @@ TODO mention MavenCentral when publishing there is set up
 **build.gradle**
 ```groovy
 dependencies {
-    implementation 'com.siemens.scp.standardbom:standard-bom:2.0.0'
+    implementation 'com.siemens.scp.standardbom:standard-bom:2.1.0'
 }
 ```
 

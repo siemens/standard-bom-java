@@ -47,6 +47,7 @@ public class BomEntryTest
         underTest.addLicense(new License());
         underTest.addSources(sourceRef);
         underTest.setCopyright("statement1\nstatement2");
+        underTest.setCpe("cpe:2.3:a:acme:component_framework:-:*:*:*:*:*:*:*");
         underTest.setThirdPartyNotices("notice1\nnotice2");
         underTest.setLegalRemark("Wait, that's illegal.");
         underTest.setMd5("b24f3a25bc033352f1c3ab2c683b926c");
@@ -71,6 +72,7 @@ public class BomEntryTest
         Assert.assertNotNull(underTest.getLicenses());
         Assert.assertNotNull(underTest.getSources());
         Assert.assertEquals("statement1\nstatement2", underTest.getCopyright());
+        Assert.assertEquals("cpe:2.3:a:acme:component_framework:-:*:*:*:*:*:*:*", underTest.getCpe());
         Assert.assertEquals("notice1\nnotice2", underTest.getThirdPartyNotices());
         Assert.assertEquals("Wait, that's illegal.", underTest.getLegalRemark());
         Assert.assertEquals("b24f3a25bc033352f1c3ab2c683b926c", underTest.getMd5());

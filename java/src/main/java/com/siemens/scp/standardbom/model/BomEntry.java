@@ -418,6 +418,23 @@ public class BomEntry
 
 
     @CheckForNull
+    @SuppressWarnings("deprecation")
+    public String getCpe()
+    {
+        return cycloneDxComponent.getCpe();
+    }
+
+
+
+    @SuppressWarnings("deprecation")
+    public void setCpe(@Nullable final String pCpeName)
+    {
+        cycloneDxComponent.setCpe(pCpeName);
+    }
+
+
+
+    @CheckForNull
     public String getThirdPartyNotices()
     {
         return propertyProc.get(CustomProperty.THIRD_PARTY_NOTICES);

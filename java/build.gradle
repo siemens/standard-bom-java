@@ -220,6 +220,7 @@ tasks.named('javadoc').configure {
     options.links('https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.2/',
             'https://docs.oracle.com/javase/8/docs/api/',
             'https://cyclonedx.github.io/cyclonedx-core-java/')
+    excludes = ['com/siemens/sbom/standardbom/internal/**']
 
     // javadoc does not inherit the proxy settings (https://issues.gradle.org/browse/GRADLE-1228)
     if (System.properties['http.proxyHost'] != null) {

@@ -23,15 +23,15 @@ public final class CustomProperty
     /** Pass-through legal text. */
     public static final String LEGAL_REMARK = "legalRemark";
 
-    /** The primary programming language in which the component is written. Here, almost always {@code "Java"} . */
+    /** The primary programming language in which the component is written. Here, almost always {@code "Java"}. */
     public static final String PRIMARY_LANGUAGE = "primaryLanguage";
 
     public static final String THIRD_PARTY_NOTICES = "thirdPartyNotices";
 
     /**
      * A flag ({@code true} or {@code false}) indicating whether the Git workspace was clean when the SBOM was created,
-     * i.e. all changes had been committed. <p>Used on SBOM level, when describing the component for which the SBOM is
-     * created.</p>
+     * i.e&#46; all changes had been committed. <p>Used on SBOM level, when describing the component for which the SBOM
+     * is created.</p>
      */
     public static final String VCS_CLEAN = "vcsClean";
 

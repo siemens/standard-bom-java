@@ -46,7 +46,7 @@ ext {
     codeRepo = 'https://github.com/siemens/standard-bom-java'
 }
 
-group 'com.siemens.scp.standardbom'
+group 'com.siemens.sbom.standardbom'
 description = 'A standardized description of a Software Bill of Materials (SBOM) in CycloneDX format'
 version = project.ext.gitVersion
 
@@ -162,7 +162,7 @@ tasks.named('jar').configure {
                 'Implementation-Vendor-Id'   : 'com.siemens',
                 'Implementation-Version'     : project.version,
                 'Implementation-SCM-Revision': project.ext.gitHash,
-                'Automatic-Module-Name'      : 'com.siemens.scp.standardbom',
+                'Automatic-Module-Name'      : 'com.siemens.sbom.standardbom',
                 'Website'                    : project.ext.website,
                 'Created-By'                 : "Gradle ${gradle.gradleVersion}",
                 'Built-By'                   : System.getProperty('user.name'),

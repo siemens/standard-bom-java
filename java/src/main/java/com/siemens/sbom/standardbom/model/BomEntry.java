@@ -418,7 +418,6 @@ public class BomEntry
 
 
     @CheckForNull
-    @SuppressWarnings("deprecation")
     public String getCpe()
     {
         return cycloneDxComponent.getCpe();
@@ -426,7 +425,6 @@ public class BomEntry
 
 
 
-    @SuppressWarnings("deprecation")
     public void setCpe(@Nullable final String pCpeName)
     {
         cycloneDxComponent.setCpe(pCpeName);

@@ -44,6 +44,10 @@ ext {
     publishedName = 'standard-bom'
     website = 'https://sbom.siemens.io/'
     codeRepo = 'https://github.com/siemens/standard-bom-java'
+
+    // The version of the spec we are currently implementing.
+    // Must correspond to an existing tag, without the leading 'v', or validation may fail later!
+    formatVersion = '2.2.0'
 }
 
 group 'com.siemens.sbom.standardbom'
@@ -106,7 +110,7 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation' << '-proc:none'
 }
 
-task createVersionFile {
+tasks.register('createVersionFile') {
     group = LifecycleBasePlugin.BUILD_GROUP
     description = 'Create a properties file containing the current version number.'
     final File outFile = new File(temporaryDir, "standard-bom-version.properties")
@@ -117,12 +121,13 @@ task createVersionFile {
         props.setProperty('version', project.getVersion().toString())
         props.setProperty('clean', String.valueOf(project.ext.gitCleanBuild))
         props.setProperty('website', project.ext.website)
+        props.setProperty('format', project.ext.formatVersion)
         outFile.withPrintWriter('UTF-8', {
             props.store(it, rootProject.name + ' version information')
         })
     }
 }
-tasks.processResources.dependsOn(tasks.createVersionFile)
+tasks.named('processResources').configure { it.dependsOn(tasks.createVersionFile) }
 sourceSets.main.resources.srcDir(tasks.createVersionFile.temporaryDir)
 
 

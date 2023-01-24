@@ -35,7 +35,9 @@ import com.siemens.sbom.standardbom.model.StandardBom;
  */
 public class StandardBomParserTest
 {
-    private static final String CURRENT_BOM_VERSION = VersionUtil.getFormatVersion();
+    private static final String LIBRARY_VERSION = VersionUtil.getLibraryVersion();
+
+    private static final String FORMAT_VERSION = VersionUtil.getFormatVersion();
 
     @Rule
     public final TemporaryFolder tempDir = new TemporaryFolder();
@@ -98,8 +100,10 @@ public class StandardBomParserTest
         @SuppressWarnings("ConstantConditions")
         byte[] expected = Files.readAllBytes(Paths.get(getClass().getResource("full-valid.json").toURI()));
         String expectedStr = new String(expected, StandardCharsets.UTF_8);
-        expectedStr = expectedStr.replaceAll(Pattern.quote("${currentVersion}"),
-            Matcher.quoteReplacement(CURRENT_BOM_VERSION));
+        expectedStr = expectedStr.replaceAll(Pattern.quote("${libraryVersion}"),
+            Matcher.quoteReplacement(LIBRARY_VERSION));
+        expectedStr = expectedStr.replaceAll(Pattern.quote("${formatVersion}"),
+            Matcher.quoteReplacement(FORMAT_VERSION));
         expected = expectedStr.getBytes(StandardCharsets.UTF_8);
 
         StandardBom parsed = null;

@@ -48,6 +48,13 @@ public final class VersionUtil
 
     public static String getFormatVersion()
     {
+        return VERSION_PROPS.getProperty("format");
+    }
+
+
+
+    public static String getLibraryVersion()
+    {
         return VERSION_PROPS.getProperty("version");
     }
 

@@ -9,6 +9,7 @@ import java.util.List;
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
 import org.cyclonedx.model.ExternalReference;
+import org.cyclonedx.model.Property;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -135,5 +136,27 @@ public class StandardBomTest
         final List<ExternalComponent> actual = underTest.getExternalComponents();
         Assert.assertNotNull(actual);
         Assert.assertTrue(actual.isEmpty());
+    }
+
+
+
+    @Test
+    public void testProfileAccessor()
+    {
+        final String testProfileName = "unittest";
+
+        final StandardBom underTest = new StandardBom();
+        underTest.setProfile(testProfileName);
+
+        Assert.assertEquals(testProfileName, underTest.getProfile());
+        Assert.assertNotNull(underTest.getCycloneDxBom());
+        Assert.assertNotNull(underTest.getCycloneDxBom().getMetadata());
+        final List<Property> actualProps = underTest.getCycloneDxBom().getMetadata().getProperties();
+        Assert.assertNotNull(actualProps);
+        Assert.assertEquals(1, actualProps.size());
+        Assert.assertNotNull(actualProps.get(0));
+        Assert.assertEquals(StandardBom.CUSTOM_PROPERTY_NAMESPACE + ":" + CustomProperty.PROFILE,
+            actualProps.get(0).getName());
+        Assert.assertEquals(testProfileName, actualProps.get(0).getValue());
     }
 }

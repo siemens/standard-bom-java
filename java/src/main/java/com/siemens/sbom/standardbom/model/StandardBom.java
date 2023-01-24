@@ -9,7 +9,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.cyclonedx.model.Bom;
 import org.cyclonedx.model.Dependency;
@@ -17,6 +19,7 @@ import org.cyclonedx.model.ExternalReference;
 import org.cyclonedx.model.Metadata;
 import org.cyclonedx.model.Tool;
 
+import com.siemens.sbom.standardbom.internal.PropertyProcessor;
 import com.siemens.sbom.standardbom.internal.VersionUtil;
 
 
@@ -33,6 +36,8 @@ public class StandardBom
      */
     public static final String CUSTOM_PROPERTY_NAMESPACE = "siemens";
 
+    private final PropertyProcessor metaPropProc;
+
     private final Bom cycloneDxSbom;
 
 
@@ -48,6 +53,7 @@ public class StandardBom
     public StandardBom(@Nonnull final Bom pCycloneDxSbom)
     {
         cycloneDxSbom = Objects.requireNonNull(pCycloneDxSbom, "SBOM must not be null");
+        metaPropProc = new PropertyProcessor(() -> getMetadata().getProperties(), p -> getMetadata().addProperty(p));
     }
 
 
@@ -156,6 +162,21 @@ public class StandardBom
     public void addExternalComponent(@Nonnull final ExternalComponent pExternalComponent)
     {
         cycloneDxSbom.addExternalReference(pExternalComponent.getCycloneDxRef());
+    }
+
+
+
+    public void setProfile(@Nullable final String pProfile)
+    {
+        metaPropProc.set(CustomProperty.PROFILE, pProfile);
+    }
+
+
+
+    @CheckForNull
+    public String getProfile()
+    {
+        return metaPropProc.get(CustomProperty.PROFILE);
     }
 
 

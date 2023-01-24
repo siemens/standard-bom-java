@@ -26,6 +26,12 @@ public final class CustomProperty
     /** The primary programming language in which the component is written. Here, almost always {@code "Java"}. */
     public static final String PRIMARY_LANGUAGE = "primaryLanguage";
 
+    /**
+     * The <a href="https://sbom.siemens.io/latest/profiles.html">Standard BOM Profile</a> declared for this SBOM.
+     * <p>Used on SBOM level ({@code metadata/properties}).</p>
+     */
+    public static final String PROFILE = "profile";
+
     public static final String THIRD_PARTY_NOTICES = "thirdPartyNotices";
 
     /**

@@ -3,9 +3,12 @@
  */
 package com.siemens.sbom.standardbom.model;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
 import org.cyclonedx.model.ExternalReference;
@@ -158,5 +161,27 @@ public class StandardBomTest
         Assert.assertEquals(StandardBom.CUSTOM_PROPERTY_NAMESPACE + ":" + CustomProperty.PROFILE,
             actualProps.get(0).getName());
         Assert.assertEquals(testProfileName, actualProps.get(0).getValue());
+    }
+
+
+
+    @Test
+    public void testTimestampParsing()
+        throws IOException
+    {
+        ValidTimestamps actual = null;
+        try (InputStream is = getClass().getResourceAsStream("valid-timestamps.json")) {
+            actual = new ObjectMapper().readValue(is, ValidTimestamps.class);
+        }
+
+        Assert.assertNotNull(actual);
+        Assert.assertEquals(new Date(1674654121000L), actual.date1);
+        Assert.assertEquals(new Date(1674657721000L), actual.date2);
+        Assert.assertEquals(new Date(1674657721000L), actual.date3);
+        Assert.assertEquals(new Date(1674657721000L), actual.date4);
+        Assert.assertEquals(new Date(1674654121000L), actual.date5);
+        Assert.assertEquals(new Date(1674641521000L), actual.date6);
+        Assert.assertEquals(new Date(1674657720000L), actual.date7);
+        Assert.assertEquals(new Date(1674654120000L), actual.date8);
     }
 }

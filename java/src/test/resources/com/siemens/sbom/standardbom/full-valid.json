@@ -106,12 +106,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/3f18e1aa31031d89db6f01ba05d501258ce69d2c/commons-codec-1.13.jar",
+          "url" : "file:///binaries/3f18e1aa31031d89db6f01ba05d501258ce69d2c/commons-codec-1.13.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/226247b40160f2892fa4c7851b5b913d5d10912d/commons-codec-1.13-sources.jar",
+          "url" : "file:///sources/226247b40160f2892fa4c7851b5b913d5d10912d/commons-codec-1.13-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -222,12 +222,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/f5e9a2ffca496057d6891a3de65128efc636e26e/log4j-api-2.11.2.jar",
+          "url" : "file:///binaries/f5e9a2ffca496057d6891a3de65128efc636e26e/log4j-api-2.11.2.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/a11bdc0e8f95da31527b4f34f1a35c23e197498d/log4j-api-2.11.2-sources.jar",
+          "url" : "file:///sources/a11bdc0e8f95da31527b4f34f1a35c23e197498d/log4j-api-2.11.2-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -338,12 +338,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/6c2fb3f5b7cd27504726aef1b674b542a0c9cf53/log4j-core-2.11.2.jar",
+          "url" : "file:///binaries/6c2fb3f5b7cd27504726aef1b674b542a0c9cf53/log4j-core-2.11.2.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/338d2678d341eedbc5273f983766dc65ffed13c2/log4j-core-2.11.2-sources.jar",
+          "url" : "file:///sources/338d2678d341eedbc5273f983766dc65ffed13c2/log4j-core-2.11.2-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -454,12 +454,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/0194e36a54b0c292aad6fab90340ab45002fd8ad/log4j-jul-2.11.2.jar",
+          "url" : "file:///binaries/0194e36a54b0c292aad6fab90340ab45002fd8ad/log4j-jul-2.11.2.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/f321ddc4d8cc1341c0994ace2309f72a0228e16e/log4j-jul-2.11.2-sources.jar",
+          "url" : "file:///sources/f321ddc4d8cc1341c0994ace2309f72a0228e16e/log4j-jul-2.11.2-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -570,12 +570,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/4d44e4edc4a7fb39f09b95b09f560a15976fa1ba/log4j-slf4j-impl-2.11.2.jar",
+          "url" : "file:///binaries/4d44e4edc4a7fb39f09b95b09f560a15976fa1ba/log4j-slf4j-impl-2.11.2.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/6bb10559db88828dac3627de26974035a5dd4ddb/log4j-slf4j-impl-2.11.2-sources.jar",
+          "url" : "file:///sources/6bb10559db88828dac3627de26974035a5dd4ddb/log4j-slf4j-impl-2.11.2-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -686,12 +686,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/8031352b2bb0a49e67818bf04c027aa92e645d5c/jul-to-slf4j-1.7.26.jar",
+          "url" : "file:///binaries/8031352b2bb0a49e67818bf04c027aa92e645d5c/jul-to-slf4j-1.7.26.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/74d35fd39913770cb0213e0ca418f485ed69ce4c/jul-to-slf4j-1.7.26-sources.jar",
+          "url" : "file:///sources/74d35fd39913770cb0213e0ca418f485ed69ce4c/jul-to-slf4j-1.7.26-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -798,12 +798,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/77100a62c2e6f04b53977b9f541044d7d722693d/slf4j-api-1.7.26.jar",
+          "url" : "file:///binaries/77100a62c2e6f04b53977b9f541044d7d722693d/slf4j-api-1.7.26.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/021c84cdf9da108216b5e402611d4af479b60cb8/slf4j-api-1.7.26-sources.jar",
+          "url" : "file:///sources/021c84cdf9da108216b5e402611d4af479b60cb8/slf4j-api-1.7.26-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {
@@ -909,7 +909,7 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/bee664b2fae32f0baafb30edd76f49a08112dd74/spring-boot-starter-log4j2-2.1.6.RELEASE.jar",
+          "url" : "file:///binaries/bee664b2fae32f0baafb30edd76f49a08112dd74/spring-boot-starter-log4j2-2.1.6.RELEASE.jar",
           "comment" : "relativePath"
         },
         {
@@ -961,12 +961,12 @@
       "externalReferences" : [
         {
           "type" : "distribution",
-          "url" : "file:binaries/a68edadecd5fa76b023fbbe818a4a77987e84946/foo.jar",
+          "url" : "file:///binaries/a68edadecd5fa76b023fbbe818a4a77987e84946/foo.jar",
           "comment" : "relativePath"
         },
         {
           "type" : "distribution",
-          "url" : "file:sources/6b75db9efc8c2f547ad9b6069579543453524f0d/foo-sources.jar",
+          "url" : "file:///sources/6b75db9efc8c2f547ad9b6069579543453524f0d/foo-sources.jar",
           "comment" : "source archive (local copy)",
           "hashes" : [
             {

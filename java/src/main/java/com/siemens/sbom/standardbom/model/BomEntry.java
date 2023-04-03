@@ -23,6 +23,7 @@ import org.cyclonedx.model.License;
 import org.cyclonedx.model.LicenseChoice;
 
 import com.siemens.sbom.standardbom.internal.ExtRefProcessor;
+import com.siemens.sbom.standardbom.internal.FileProtocolHandler;
 import com.siemens.sbom.standardbom.internal.HashProcessor;
 import com.siemens.sbom.standardbom.internal.PropertyProcessor;
 
@@ -343,8 +344,7 @@ public class BomEntry
     @CheckForNull
     public String getRelativePath()
     {
-        String result = extRefProc.get(TYPE_RELATIVE_PATH);
-        return result != null && result.startsWith("file:") ? result.substring("file:".length()) : result;
+        return FileProtocolHandler.withoutFileProtocol(extRefProc.get(TYPE_RELATIVE_PATH));
     }
 
 
@@ -353,7 +353,8 @@ public class BomEntry
     {
         String relativePath = pRelativePath;
         if (relativePath != null && !relativePath.contains(":")) {
-            relativePath = "file:" + relativePath.replaceAll(Pattern.quote("\\"), "/");
+            relativePath = relativePath.replaceAll(Pattern.quote("\\"), "/");
+            relativePath = FileProtocolHandler.ensureFileProtocol(relativePath);
         }
         extRefProc.set(TYPE_RELATIVE_PATH, relativePath, ref -> {
             ref.setType(ExternalReference.Type.DISTRIBUTION);

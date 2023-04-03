@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 
 import org.cyclonedx.model.ExternalReference;
 
+import com.siemens.sbom.standardbom.internal.FileProtocolHandler;
+
 
 /**
  * A source artifact reference which explicitly refers to a downloaded copy of the source archive via a relative path.
@@ -39,8 +41,7 @@ public class SourceArtifactRefLocal
     @CheckForNull
     public String getRelativePath()
     {
-        String result = getCycloneDxRef().getUrl();
-        return result != null && result.startsWith("file:") ? result.substring("file:".length()) : result;
+        return FileProtocolHandler.withoutFileProtocol(getCycloneDxRef().getUrl());
     }
 
 
@@ -61,7 +62,7 @@ public class SourceArtifactRefLocal
         if (pRelativePath != null) {
             relativePath = pRelativePath.replaceAll(Pattern.quote("\\"), "/");
         }
-        getCycloneDxRef().setUrl("file:" + relativePath);
+        getCycloneDxRef().setUrl(FileProtocolHandler.ensureFileProtocol(relativePath));
         getCycloneDxRef().setComment(SOURCE_ARCHIVE_LOCAL);
     }
 }

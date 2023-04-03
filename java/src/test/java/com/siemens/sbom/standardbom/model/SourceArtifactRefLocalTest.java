@@ -22,7 +22,7 @@ public class SourceArtifactRefLocalTest
         final ExternalReference actual = underTest.getCycloneDxRef();
         Assert.assertEquals(ExternalReference.Type.DISTRIBUTION, actual.getType());
         Assert.assertEquals(SourceArtifactRefLocal.SOURCE_ARCHIVE_LOCAL, actual.getComment());
-        Assert.assertEquals("file:null", actual.getUrl());
+        Assert.assertNull(actual.getUrl());
     }
 
 

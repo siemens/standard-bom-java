@@ -182,6 +182,21 @@ public class StandardBom
 
 
 
+    public void setSerialNumber(@Nullable final String pSerialNumber)
+    {
+        cycloneDxSbom.setSerialNumber(pSerialNumber);
+    }
+
+
+
+    @CheckForNull
+    public String getSerialNumber()
+    {
+        return cycloneDxSbom.getSerialNumber();
+    }
+
+
+
     @Nonnull
     public Bom getCycloneDxBom()
     {

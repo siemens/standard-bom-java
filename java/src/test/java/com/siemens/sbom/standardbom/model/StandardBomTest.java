@@ -184,4 +184,15 @@ public class StandardBomTest
         Assert.assertEquals(new Date(1674657720000L), actual.date7);
         Assert.assertEquals(new Date(1674654120000L), actual.date8);
     }
+
+
+
+    @Test
+    public void testSerialNumber()
+    {
+        final StandardBom underTest = new StandardBom();
+        final String sn = "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79";
+        underTest.setSerialNumber(sn);
+        Assert.assertEquals(sn, underTest.getSerialNumber());
+    }
 }

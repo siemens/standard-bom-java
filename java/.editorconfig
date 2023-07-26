@@ -1,3 +1,7 @@
+#
+# Copyright (c) Siemens AG 2019-2023 ALL RIGHTS RESERVED
+#
+
 [*]
 charset = utf-8
 indent_size = 4

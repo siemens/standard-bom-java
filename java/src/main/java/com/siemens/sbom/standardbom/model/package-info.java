@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Siemens AG 2019-2023 ALL RIGHTS RESERVED
+ * Copyright (c) Siemens AG 2019-2024 ALL RIGHTS RESERVED
  */
 
 /**

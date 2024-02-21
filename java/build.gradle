@@ -66,7 +66,7 @@ project.gradle.taskGraph.whenReady { taskGraph ->
 dependencies {
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
     api group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
-    api group: 'org.cyclonedx', name: 'cyclonedx-core-java', version: '7.3.1'
+    api group: 'org.cyclonedx', name: 'cyclonedx-core-java', version: '7.3.2'
 
     testCompileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'

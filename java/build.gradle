@@ -46,7 +46,7 @@ ext {
 
     // The version of the spec we are currently implementing.
     // Must correspond to an existing tag, without the leading 'v', or validation may fail later!
-    formatVersion = '2.2.0'
+    formatVersion = '2.4.0'
 }
 
 group 'com.siemens.sbom.standardbom'

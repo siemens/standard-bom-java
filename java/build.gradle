@@ -19,6 +19,7 @@ repositories {
 
 
 import org.gradle.internal.jvm.Jvm
+
 /*
  * - - - -  PROJECT METADATA  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
@@ -71,8 +72,6 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'commons-io', name: 'commons-io'
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j18-impl', version: '2.18.0'
-
-    checkstyle group: 'com.github.sevntu-checkstyle', name: 'sevntu-checks', version: '1.32.0'
 }
 
 
@@ -245,7 +244,7 @@ tasks.named('javadoc').configure {
  * - - - -  CHECKSTYLE  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 checkstyle {
-    toolVersion '8.14'
+    toolVersion '8.27'
     showViolations = true
     ignoreFailures = false
 }
@@ -253,6 +252,11 @@ project.extensions.findByName('checkstyle').sourceSets.each { SourceSet s ->
     Checkstyle task = (Checkstyle) tasks.findByName(s.getTaskName('checkstyle', null))
     task.setSource(s.allSource)
     getLogger().info('Reconfigured task \'' + task.name + '\' to include all files in sourceSet \'' + s.name + '\'')
+}
+
+dependencies {
+    checkstyle "com.puppycrawl.tools:checkstyle:${project.extensions.checkstyle.toolVersion}"
+    checkstyle group: 'com.github.sevntu-checkstyle', name: 'sevntu-checks', version: '1.37.0'
 }
 
 

@@ -2,7 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <!--
-    Checkstyle version:  8.14
+    Checkstyle version:  8.27
     Extra checks active: SevNTU Checkstyle
 -->
 <module name="Checker">
@@ -10,7 +10,7 @@
     <property name="severity" value="warning" />
 
     <module name="NewlineAtEndOfFile">
-        <property name="fileExtensions" value="csv,java,js,json,jsp,properties,ts,txt,xml,yml,yaml" />
+        <property name="fileExtensions" value="csv,java,js,json,properties,ts,txt,xml,yml,yaml" />
     </module>
     <module name="FileTabCharacter">
         <property name="fileExtensions" value="csv,java,js,json,jsp,properties,ts,txt,xml,yml,yaml" />
@@ -19,6 +19,13 @@
         <property name="fileExtensions" value="java,jsp,js,ts" />
         <property name="severity" value="info" />
         <property name="max" value="1500" />
+    </module>
+    <module name="LineLength">
+        <property name="severity" value="info" />
+        <property name="fileExtensions" value="java,js,md,ts,txt,xml" />
+        <property name="max" value="120" />
+        <property name="tabWidth" value="4" />
+        <property name="ignorePattern" value="^\s*\*\s*\S+$" />
     </module>
     <module name="RegexpSingleline">
         <property name="fileExtensions" value="java,js,json,jsp,properties,ts,txt,xml" />
@@ -59,7 +66,11 @@
         <module name="ParameterName">
             <property name="format" value="^p[A-Z][a-zA-Z0-9]{0,30}$" />
             <message key="name.invalidPattern"
-                    value="''{0}'' is an invalid identifier. Lower camel case, prefix 'p', up to 32 characters. The regex: {1}" />
+                    value="''{0}'' is an invalid identifier. Lower camel case, up to 32 characters, prefix 'p'. The regex: {1}" />
+        </module>
+        <module name="LambdaParameterName" />
+        <module name="CatchParameterName">
+            <property name="format" value="^e\d*$"/>
         </module>
         <module name="MethodTypeParameterName">
             <property name="format" value="^[A-Z][0-9]?$" />
@@ -138,12 +149,6 @@
             <property name="option" value="eol" />
             <property name="tokens" value="LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY" />
         </module>
-        <module name="LineLength">
-            <property name="severity" value="info" />
-            <property name="max" value="120" />
-            <property name="tabWidth" value="4" />
-            <property name="ignorePattern" value="^\s*\*\s*\S+$" />
-        </module>
         <module name="MethodParamPad" />
         <module name="ModifierOrder" />
         <module name="NeedBraces" />
@@ -163,29 +168,25 @@
         </module>
 
         <!-- Documentation -->
-        <module name="JavadocType" />
-        <module name="JavadocMethod">
-            <property name="allowUndeclaredRTE" value="true" />
-            <property name="allowThrowsTagsForSubclasses" value="true" />
-            <property name="allowMissingPropertyJavadoc" value="true" />
-            <property name="allowMissingJavadoc" value="true" />
+        <module name="MissingJavadocPackage" />
+        <module name="MissingJavadocType">
+            <property name="scope" value="private" />
         </module>
+        <module name="JavadocType" />
+        <module name="JavadocMethod" />
         <module name="JavadocStyle">
             <property name="checkEmptyJavadoc" value="true" />
             <property name="checkFirstSentence" value="false" />
             <property name="checkHtml" value="true" />
         </module>
+        <module name="InvalidJavadocPosition" />
+        <module name="NonEmptyAtclauseDescription" />
 
         <!-- Architectural Constraints -->
         <module name="IllegalImport">
             <property name="severity" value="error" />
             <property name="illegalPkgs"
                     value="com.sun,sun,java.util.logging,org.apache.commons.logging,java.lang.reflect,org.reflections" />
-        </module>
-        <module name="IllegalType">
-            <property name="severity" value="error" />
-            <property name="illegalClassNames" value="java.util.GregorianCalendar" />
-            <property name="format" value="^java\.lang\.reflect\..*$" />
         </module>
         <module name="IllegalToken">
             <property name="severity" value="error" />

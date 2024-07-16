@@ -274,9 +274,9 @@ public class BomEntry
 
 
 
-    public void setDirectDependency(final boolean pDirectDependency) // TODO allow null
+    public void setDirectDependency(@Nullable final Boolean pDirect)
     {
-        propertyProc.set(CustomProperty.DIRECT_DEPENDENCY, Boolean.toString(pDirectDependency));
+        propertyProc.set(CustomProperty.DIRECT_DEPENDENCY, pDirect != null ? Boolean.toString(pDirect) : null);
     }
 
 

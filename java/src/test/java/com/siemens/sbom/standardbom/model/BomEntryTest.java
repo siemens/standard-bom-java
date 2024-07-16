@@ -207,6 +207,19 @@ public class BomEntryTest
 
 
     @Test
+    public void testClearDirectDependencyFlag()
+    {
+        final BomEntry underTest = new BomEntry();
+        Assert.assertNull(underTest.isDirectDependency());
+        underTest.setDirectDependency(Boolean.TRUE);
+        Assert.assertEquals(Boolean.TRUE, underTest.isDirectDependency());
+        underTest.setDirectDependency(null);
+        Assert.assertNull(underTest.isDirectDependency());
+    }
+
+
+
+    @Test
     public void testInternalComponentFlag()
     {
         final BomEntry underTest = new BomEntry();

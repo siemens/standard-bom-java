@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
@@ -178,6 +179,22 @@ public class StandardBom
     public String getProfile()
     {
         return metaPropProc.get(CustomProperty.PROFILE);
+    }
+
+
+
+    public void setSbomNature(@Nullable final SbomNature pNature)
+    {
+        metaPropProc.set(CustomProperty.SBOM_NATURE,
+            pNature != null ? pNature.name().toLowerCase(Locale.ENGLISH) : null);
+    }
+
+
+
+    @CheckForNull
+    public SbomNature getSbomNature()
+    {
+        return SbomNature.parseNature(metaPropProc.get(CustomProperty.SBOM_NATURE));
     }
 
 

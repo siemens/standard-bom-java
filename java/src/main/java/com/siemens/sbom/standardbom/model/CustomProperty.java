@@ -32,6 +32,15 @@ public final class CustomProperty
      */
     public static final String PROFILE = "profile";
 
+    /**
+     * Used to indicate the nature of the entire SBOM document. Possible values are: <ul>
+     * <li><code>binary</code> – The SBOM contains binary components.</li>
+     * <li><code>source</code> – The SBOM contains source components.</li>
+     * </ul>
+     * This property is mostly relevant for package ecosystems that have this distinction, like Debian or RPM.
+     */
+    public static final String SBOM_NATURE = "sbomNature";
+
     public static final String THIRD_PARTY_NOTICES = "thirdPartyNotices";
 
     /**

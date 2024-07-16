@@ -166,6 +166,29 @@ public class StandardBomTest
 
 
     @Test
+    public void testSbomNatureAccessor()
+    {
+        final StandardBom underTest = new StandardBom();
+        underTest.setSbomNature(SbomNature.Source);
+        Assert.assertEquals(SbomNature.Source, underTest.getSbomNature());
+    }
+
+
+
+    @Test
+    public void testSbomNatureAccessorNull()
+    {
+        final StandardBom underTest = new StandardBom();
+        underTest.setSbomNature(SbomNature.Binary);
+        Assert.assertEquals(SbomNature.Binary, underTest.getSbomNature());
+
+        underTest.setSbomNature(null);
+        Assert.assertNull(underTest.getSbomNature());
+    }
+
+
+
+    @Test
     public void testTimestampParsing()
         throws IOException
     {

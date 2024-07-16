@@ -274,7 +274,7 @@ public class BomEntry
 
 
 
-    public void setDirectDependency(final boolean pDirectDependency)
+    public void setDirectDependency(final boolean pDirectDependency) // TODO allow null
     {
         propertyProc.set(CustomProperty.DIRECT_DEPENDENCY, Boolean.toString(pDirectDependency));
     }
@@ -429,6 +429,25 @@ public class BomEntry
     public void setCpe(@Nullable final String pCpeName)
     {
         cycloneDxComponent.setCpe(pCpeName);
+    }
+
+
+
+    @CheckForNull
+    public Boolean isInternal()
+    {
+        String v = propertyProc.get(CustomProperty.INTERNAL);
+        if (v != null) {
+            return Boolean.parseBoolean(v);
+        }
+        return null;
+    }
+
+
+
+    public void setInternal(@Nullable final Boolean pValue)
+    {
+        propertyProc.set(CustomProperty.INTERNAL, pValue != null ? pValue.toString() : null);
     }
 
 

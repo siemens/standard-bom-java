@@ -207,6 +207,29 @@ public class BomEntryTest
 
 
     @Test
+    public void testInternalComponentFlag()
+    {
+        final BomEntry underTest = new BomEntry();
+        Assert.assertNull(underTest.isInternal());
+        underTest.setInternal(true);
+        Assert.assertEquals(Boolean.TRUE, underTest.isInternal());
+    }
+
+
+
+    @Test
+    public void testClearInternalComponentFlag()
+    {
+        final BomEntry underTest = new BomEntry();
+        underTest.setInternal(false);
+        Assert.assertEquals(Boolean.FALSE, underTest.isInternal());
+        underTest.setInternal(null);
+        Assert.assertNull(underTest.isInternal());
+    }
+
+
+
+    @Test
     public void testSourceRefUrls()
     {
         final BomEntry underTest = new BomEntry();

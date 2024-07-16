@@ -20,6 +20,10 @@ public final class CustomProperty
      */
     public static final String FILENAME = "filename";
 
+    /** A flag indicating whether the component is an internal ("in-house") component (<code>true</code>) or not
+     *  (<code>false</code>). */
+    public static final String INTERNAL = "internal";
+
     /** Pass-through legal text. */
     public static final String LEGAL_REMARK = "legalRemark";
 

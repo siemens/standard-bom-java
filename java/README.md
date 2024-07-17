@@ -13,7 +13,7 @@ TODO mention MavenCentral when publishing there is set up
 **build.gradle**
 ```groovy
 dependencies {
-    implementation 'com.siemens.sbom.standardbom:standard-bom:3.3.0'
+    implementation 'com.siemens.sbom.standardbom:standard-bom:3.4.0'
 }
 ```
 
@@ -64,7 +64,7 @@ In order to build this library on your local PC, and/or contribute to this libra
 1. **Java** - make sure [JDK 8](https://adoptium.net/temurin/releases/?version=8) is available on your system, and
    the `JAVA_HOME` environment variable points to it.
 
-2. **Gradle environment variable** - `GRADLE_USER_HOME` should be set globally to the directory
+2. **Gradle environment variable** - `GRADLE_USER_HOME` should be set globally to a directory like
    C:/Users/xxxx/.gradle (`xxxx` being your user ID; you might want to use backslashes on Windows). Create the
    directory if it doesn't exist.  
    Note that you *must not* install Gradle manually. If you have a manual Gradle installation on your machine, remove

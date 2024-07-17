@@ -114,11 +114,13 @@ tasks.register('createVersionFile') {
     outputs.file(outFile)
     doLast {
         Properties props = new Properties()
-        props.setProperty('name', project.name)
-        props.setProperty('version', project.getVersion().toString())
         props.setProperty('clean', String.valueOf(project.ext.gitCleanBuild))
-        props.setProperty('website', project.ext.website)
-        props.setProperty('format', project.ext.formatVersion)
+        props.setProperty('libName', "${project.group}:${project.name}")
+        props.setProperty('libVersion', project.getVersion().toString())
+        props.setProperty('libWebsite', "${project.ext.codeRepo}/-/tree/main/java")
+        props.setProperty('specName', project.name)
+        props.setProperty('specVersion', project.ext.formatVersion)
+        props.setProperty('specWebsite', project.ext.website)
         outFile.withPrintWriter('UTF-8', {
             props.store(it, rootProject.name + ' version information')
         })

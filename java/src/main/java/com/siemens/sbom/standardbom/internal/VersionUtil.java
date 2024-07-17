@@ -46,22 +46,43 @@ public final class VersionUtil
 
 
 
-    public static String getFormatVersion()
+    public static String getSpecToolName()
     {
-        return VERSION_PROPS.getProperty("format");
+        return VERSION_PROPS.getProperty("specName");
+    }
+
+
+
+    public static String getSpecVersion()
+    {
+        return VERSION_PROPS.getProperty("specVersion");
+    }
+
+
+
+    public static String getSpecWebsite()
+    {
+        return VERSION_PROPS.getProperty("specWebsite");
+    }
+
+
+
+    public static String getLibraryToolName()
+    {
+        return VERSION_PROPS.getProperty("libName");
     }
 
 
 
     public static String getLibraryVersion()
     {
-        return VERSION_PROPS.getProperty("version");
+        return VERSION_PROPS.getProperty("libVersion");
     }
 
 
 
-    public static String getWebsite()
+    public static String getLibraryWebsite()
     {
-        return VERSION_PROPS.getProperty("website");
+        return VERSION_PROPS.getProperty("libWebsite");
     }
 }

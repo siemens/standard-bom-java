@@ -37,7 +37,7 @@ public class StandardBomParserTest
 {
     private static final String LIBRARY_VERSION = VersionUtil.getLibraryVersion();
 
-    private static final String FORMAT_VERSION = VersionUtil.getFormatVersion();
+    private static final String FORMAT_VERSION = VersionUtil.getSpecVersion();
 
     @Rule
     public final TemporaryFolder tempDir = new TemporaryFolder();
@@ -63,7 +63,7 @@ public class StandardBomParserTest
         Assert.assertNotNull(parsed);
         Assert.assertNotNull(parsed.getMetadata());
         Assert.assertNotNull(parsed.getMetadata().getTools());
-        Assert.assertEquals(3, parsed.getMetadata().getTools().size());
+        Assert.assertEquals(4, parsed.getMetadata().getTools().size());
         Assert.assertEquals(new Date(1657292400000L), parsed.getMetadata().getTimestamp());
         Assert.assertEquals(9, parsed.getComponents().size());
         Assert.assertNotNull(parsed.getCycloneDxBom().getExternalReferences());
@@ -84,7 +84,7 @@ public class StandardBomParserTest
         Assert.assertNotNull(parsed);
         Assert.assertNotNull(parsed.getMetadata());
         Assert.assertNotNull(parsed.getMetadata().getTools());
-        Assert.assertEquals(3, parsed.getMetadata().getTools().size());
+        Assert.assertEquals(4, parsed.getMetadata().getTools().size());
         Assert.assertEquals(new Date(1657292400000L), parsed.getMetadata().getTimestamp());
         Assert.assertEquals(9, parsed.getComponents().size());
         Assert.assertNotNull(parsed.getCycloneDxBom().getExternalReferences());

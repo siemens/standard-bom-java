@@ -56,6 +56,7 @@
       ]
     },
     "component" : {
+      "type" : "application",
       "group" : "com.example.component",
       "name" : "my-component",
       "version" : "3.7.4",
@@ -79,8 +80,7 @@
           "name" : "siemens:vcsClean",
           "value" : "true"
         }
-      ],
-      "type" : "application"
+      ]
     },
     "properties" : [
       {
@@ -1227,6 +1227,8 @@
       ]
     },
     {
+      "type" : "file",
+      "bom-ref" : "foo.jar?a68edadecd5fa76b023fbbe818a4a77987e84946",
       "name" : "foo.jar",
       "hashes" : [
         {
@@ -1289,9 +1291,7 @@
           "name" : "siemens:primaryLanguage",
           "value" : "Java"
         }
-      ],
-      "type" : "file",
-      "bom-ref" : "foo.jar?a68edadecd5fa76b023fbbe818a4a77987e84946"
+      ]
     }
   ],
   "externalReferences" : [

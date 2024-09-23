@@ -62,8 +62,9 @@ public class StandardBomParserTest
 
         Assert.assertNotNull(parsed);
         Assert.assertNotNull(parsed.getMetadata());
-        Assert.assertNotNull(parsed.getMetadata().getTools());
-        Assert.assertEquals(4, parsed.getMetadata().getTools().size());
+        Assert.assertNotNull(parsed.getMetadata().getToolChoice());
+        Assert.assertNotNull(parsed.getMetadata().getToolChoice().getComponents());
+        Assert.assertEquals(3, parsed.getMetadata().getToolChoice().getComponents().size());
         Assert.assertEquals(new Date(1657292400000L), parsed.getMetadata().getTimestamp());
         Assert.assertEquals(9, parsed.getComponents().size());
         Assert.assertNotNull(parsed.getCycloneDxBom().getExternalReferences());
@@ -83,8 +84,9 @@ public class StandardBomParserTest
 
         Assert.assertNotNull(parsed);
         Assert.assertNotNull(parsed.getMetadata());
-        Assert.assertNotNull(parsed.getMetadata().getTools());
-        Assert.assertEquals(4, parsed.getMetadata().getTools().size());
+        Assert.assertNotNull(parsed.getMetadata().getToolChoice());
+        Assert.assertNotNull(parsed.getMetadata().getToolChoice().getComponents());
+        Assert.assertEquals(3, parsed.getMetadata().getToolChoice().getComponents().size());
         Assert.assertEquals(new Date(1657292400000L), parsed.getMetadata().getTimestamp());
         Assert.assertEquals(9, parsed.getComponents().size());
         Assert.assertNotNull(parsed.getCycloneDxBom().getExternalReferences());

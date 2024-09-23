@@ -21,6 +21,7 @@ import org.cyclonedx.model.ExternalReference;
 import org.cyclonedx.model.Hash;
 import org.cyclonedx.model.License;
 import org.cyclonedx.model.LicenseChoice;
+import org.cyclonedx.model.OrganizationalContact;
 
 import com.siemens.sbom.standardbom.internal.ExtRefProcessor;
 import com.siemens.sbom.standardbom.internal.FileProtocolHandler;
@@ -117,65 +118,6 @@ public class BomEntry
 
 
 
-    /**
-     * Getter.
-     *
-     * @return the namespace
-     *
-     * @deprecated use {@link #getGroup()} instead
-     */
-    @CheckForNull
-    @Deprecated
-    public String getNamespace()
-    {
-        return cycloneDxComponent.getGroup();
-    }
-
-
-
-    /**
-     * Setter.
-     *
-     * @param pNamespace the new value
-     * @deprecated use {@link #setGroup(String)} instead
-     */
-    @Deprecated
-    public void setNamespace(final String pNamespace)
-    {
-        cycloneDxComponent.setGroup(pNamespace);
-    }
-
-
-
-    /**
-     * Getter.
-     *
-     * @return the artifact ID
-     *
-     * @deprecated use {@link #getName()} instead
-     */
-    @Deprecated
-    public String getArtifactId()
-    {
-        return getName();
-    }
-
-
-
-    /**
-     * Setter.
-     *
-     * @param pArtifactId the new artifact ID
-     * @deprecated use {@link #setName(String)} instead
-     */
-    @Deprecated
-    public void setArtifactId(final String pArtifactId)
-    {
-        setName(pArtifactId);
-    }
-
-
-
     public String getName()
     {
         return cycloneDxComponent.getName();
@@ -218,17 +160,41 @@ public class BomEntry
 
 
 
-    @CheckForNull
-    public String getAuthor()
+    public void addAuthor(@Nullable final String pName, @Nullable final String pEmail)
     {
-        return cycloneDxComponent.getAuthor();
+        if (pName != null || pEmail != null) {
+            OrganizationalContact author = new OrganizationalContact();
+            author.setName(pName);
+            author.setEmail(pEmail);
+            getAuthors().add(author);
+        }
     }
 
 
 
-    public void setAuthor(@Nullable final String pAuthor)
+    public void addAuthor(@Nullable final String pName)
     {
-        cycloneDxComponent.setAuthor(pAuthor);
+        addAuthor(pName, null);
+    }
+
+
+
+    @Nonnull
+    public List<OrganizationalContact> getAuthors()
+    {
+        List<OrganizationalContact> authors = cycloneDxComponent.getAuthors();
+        if (authors == null) {
+            authors = new ArrayList<>();
+            cycloneDxComponent.setAuthors(authors);
+        }
+        return authors;
+    }
+
+
+
+    public void setAuthors(@Nullable final List<OrganizationalContact> pNewAuthors)
+    {
+        cycloneDxComponent.setAuthors(pNewAuthors);
     }
 
 
@@ -367,10 +333,12 @@ public class BomEntry
     @Nonnull
     public LicenseChoice getLicenses()
     {
-        if (cycloneDxComponent.getLicenseChoice() == null) {
-            cycloneDxComponent.setLicenseChoice(new LicenseChoice());
+        LicenseChoice licenses = cycloneDxComponent.getLicenses();
+        if (licenses == null) {
+            licenses = new LicenseChoice();
+            cycloneDxComponent.setLicenses(licenses);
         }
-        return cycloneDxComponent.getLicenseChoice();
+        return licenses;
     }
 
 
@@ -489,9 +457,9 @@ public class BomEntry
 
 
     @Nonnull
-    public List<SourceArtifactRef> getSources()
+    public List<AbstractSourceArtifactRef> getSources()
     {
-        final List<SourceArtifactRef> sources = new ArrayList<>();
+        final List<AbstractSourceArtifactRef> sources = new ArrayList<>();
         if (cycloneDxComponent.getExternalReferences() != null) {
             for (ExternalReference ref : cycloneDxComponent.getExternalReferences()) {
                 if (SourceArtifactRefLocal.isSourceReference(ref)) {
@@ -500,9 +468,6 @@ public class BomEntry
                 else if (SourceArtifactRefUrl.isSourceReference(ref)) {
                     sources.add(new SourceArtifactRefUrl(ref));
                 }
-                else if (SourceArtifactRef.isSourceReference(ref)) {
-                    sources.add(new SourceArtifactRef(ref));
-                }
             }
         }
         return Collections.unmodifiableList(sources);
@@ -510,7 +475,7 @@ public class BomEntry
 
 
 
-    public void addSources(@Nonnull final SourceArtifactRef pSourceArtifactRef)
+    public void addSources(@Nonnull final AbstractSourceArtifactRef pSourceArtifactRef)
     {
         cycloneDxComponent.addExternalReference(pSourceArtifactRef.getCycloneDxRef());
     }

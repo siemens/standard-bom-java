@@ -3,11 +3,13 @@
  */
 package com.siemens.sbom.standardbom.model;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.ExternalReference;
+import org.cyclonedx.model.Hash;
 import org.cyclonedx.model.License;
 import org.cyclonedx.model.Property;
 import org.junit.Assert;
@@ -42,7 +44,7 @@ public class BomEntryTest
         underTest.setBomRef("pkg:maven/org.yaml/snakeyaml@1.23?type=jar");
         underTest.setRepoUrl("value9");
         underTest.setVersion("value10");
-        underTest.setAuthor("author");
+        underTest.addAuthor("author");
         underTest.setWebsite("value11");
         underTest.addLicense(new License());
         underTest.addSources(sourceRef);
@@ -67,7 +69,9 @@ public class BomEntryTest
         Assert.assertEquals("Java", underTest.getPrimaryLanguage());
         Assert.assertEquals("value9", underTest.getRepoUrl());
         Assert.assertEquals("value10", underTest.getVersion());
-        Assert.assertEquals("author", underTest.getAuthor());
+        Assert.assertNotNull(underTest.getAuthors());
+        Assert.assertEquals(1, underTest.getAuthors().size());
+        Assert.assertEquals("author", underTest.getAuthors().iterator().next().getName());
         Assert.assertEquals("value11", underTest.getWebsite());
         Assert.assertNotNull(underTest.getLicenses());
         Assert.assertNotNull(underTest.getSources());
@@ -80,21 +84,6 @@ public class BomEntryTest
         Assert.assertEquals("0c9860b8fb6f24f59e083e0b92a17c515c45312951fc272d093e4709faed6356", underTest.getSha256());
         Assert.assertEquals("f2c011cf1866aade9ea654d58b65e50d46ea203cb4f2230fc5c40822c158b6f144a184e00d98a8d29f"
             + "abfb4550690a6d2ff09d27960764b2810667b63600e303", underTest.getSha512());
-    }
-
-
-
-    @Test
-    @SuppressWarnings("deprecation")
-    public void testDeprecatedAccessors()
-    {
-        final BomEntry underTest = new BomEntry();
-
-        underTest.setNamespace("namespace");
-        underTest.setArtifactId("artifactId");
-
-        Assert.assertEquals("namespace", underTest.getNamespace());
-        Assert.assertEquals("artifactId", underTest.getArtifactId());
     }
 
 
@@ -258,10 +247,13 @@ public class BomEntryTest
         sourceRef2.setSha1("4fa1f08842f94c146ecfd17b39cb80632ccd1c67");
         underTest.addSources(sourceRef2);
 
-        final SourceArtifactRef sourceRef3 = new SourceArtifactRef();
+        final ExternalReference sourceRef3 = new ExternalReference();
+        sourceRef3.setType(ExternalReference.Type.DISTRIBUTION);
         sourceRef3.setUrl("https://example.com/url3");
-        sourceRef3.setSha1("3fa1f08842f94c146ecfd17b39cb80632ccd1c66");
-        underTest.addSources(sourceRef3);
+        sourceRef3.setComment("source archive");
+        sourceRef3.setHashes(Collections.singletonList(
+            new Hash(Hash.Algorithm.SHA1, "3fa1f08842f94c146ecfd17b39cb80632ccd1c66")));
+        underTest.getCycloneDxComponent().addExternalReference(sourceRef3);
 
         final Set<String> expected = new TreeSet<>();
         expected.add("https://example.com/url1");
@@ -293,10 +285,13 @@ public class BomEntryTest
         sourceRef3.setSha1("2fa1f08842f94c146ecfd17b39cb80632ccd1c65");
         underTest.addSources(sourceRef3);
 
-        final SourceArtifactRef sourceRef4 = new SourceArtifactRef();
+        final ExternalReference sourceRef4 = new ExternalReference();
+        sourceRef4.setType(ExternalReference.Type.DISTRIBUTION);
         sourceRef4.setUrl("https://example.com/url3");
-        sourceRef4.setSha1("3fa1f08842f94c146ecfd17b39cb80632ccd1c66");
-        underTest.addSources(sourceRef4);
+        sourceRef4.setComment("source archive");
+        sourceRef4.setHashes(Collections.singletonList(
+            new Hash(Hash.Algorithm.SHA1, "3fa1f08842f94c146ecfd17b39cb80632ccd1c66")));
+        underTest.getCycloneDxComponent().addExternalReference(sourceRef4);
 
         final Set<String> expected = new TreeSet<>();
         expected.add("my/archive1.jar");

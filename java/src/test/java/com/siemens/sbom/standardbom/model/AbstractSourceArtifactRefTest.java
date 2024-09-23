@@ -9,14 +9,14 @@ import org.junit.Test;
 
 
 /**
- * Some unit tests of {@link SourceArtifactRef}.
+ * Some unit tests of {@link AbstractSourceArtifactRef}.
  */
-public class SourceArtifactRefTest
+public class AbstractSourceArtifactRefTest
 {
     @Test
     public void testHashAccessors()
     {
-        final SourceArtifactRef underTest = new SourceArtifactRef();
+        final AbstractSourceArtifactRef underTest = new SourceArtifactRefLocal();
         underTest.setMd5("feae16743dc96025839c3a296392473d");
         underTest.setSha1("338d2678d341eedbc5273f983766dc65ffed13c2");
         underTest.setSha256("4dde81a4a934d61f3ae9f92d896facbf76a55da410f70c0ebdf4f3c0778c8d78");
@@ -35,7 +35,7 @@ public class SourceArtifactRefTest
     @Test
     public void testNull()
     {
-        Assert.assertFalse(SourceArtifactRef.isSourceReference(null));
+        Assert.assertFalse(AbstractSourceArtifactRef.isSourceReference(null));
     }
 
 
@@ -48,6 +48,6 @@ public class SourceArtifactRefTest
         ref.setUrl("https://example.com");
         ref.setComment(null);
 
-        Assert.assertFalse(SourceArtifactRef.isSourceReference(ref));
+        Assert.assertFalse(AbstractSourceArtifactRef.isSourceReference(ref));
     }
 }

@@ -67,7 +67,14 @@ public final class VersionUtil
 
 
 
-    public static String getLibraryToolName()
+    public static String getLibraryGroup()
+    {
+        return VERSION_PROPS.getProperty("libGroup");
+    }
+
+
+
+    public static String getLibraryName()
     {
         return VERSION_PROPS.getProperty("libName");
     }
@@ -77,6 +84,13 @@ public final class VersionUtil
     public static String getLibraryVersion()
     {
         return VERSION_PROPS.getProperty("libVersion");
+    }
+
+
+
+    public static String getLibraryDescription()
+    {
+        return VERSION_PROPS.getProperty("libDescription");
     }
 
 

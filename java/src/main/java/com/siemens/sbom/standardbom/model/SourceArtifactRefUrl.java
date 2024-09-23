@@ -13,12 +13,8 @@ import org.cyclonedx.model.ExternalReference;
  * A source artifact reference which explicitly refers to the original remote URL of the source archive.
  */
 public class SourceArtifactRefUrl
-    extends SourceArtifactRef
+    extends AbstractSourceArtifactRef
 {
-    public static final String SOURCE_ARCHIVE_URL = SOURCE_ARCHIVE + " (download location)";
-
-
-
     public SourceArtifactRefUrl()
     {
         this(new ExternalReference());
@@ -28,8 +24,7 @@ public class SourceArtifactRefUrl
 
     public SourceArtifactRefUrl(@Nonnull final ExternalReference pExternalReference)
     {
-        super(pExternalReference);
-        pExternalReference.setComment(SOURCE_ARCHIVE_URL);
+        super(pExternalReference, ExternalReference.Type.SOURCE_DISTRIBUTION);
     }
 
 
@@ -37,8 +32,7 @@ public class SourceArtifactRefUrl
     public static boolean isSourceReference(@Nullable final ExternalReference pExternalReference)
     {
         boolean result = pExternalReference != null
-            && SourceArtifactRef.isSourceReference(pExternalReference)
-            && SOURCE_ARCHIVE_URL.equals(pExternalReference.getComment());
+            && pExternalReference.getType() == ExternalReference.Type.SOURCE_DISTRIBUTION;
         return result;
     }
 
@@ -48,6 +42,5 @@ public class SourceArtifactRefUrl
     public void setUrl(final String pUrl)
     {
         super.setUrl(pUrl);
-        getCycloneDxRef().setComment(SOURCE_ARCHIVE_URL);
     }
 }

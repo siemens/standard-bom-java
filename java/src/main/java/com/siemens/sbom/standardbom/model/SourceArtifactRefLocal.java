@@ -17,9 +17,9 @@ import com.siemens.sbom.standardbom.internal.FileProtocolHandler;
  * A source artifact reference which explicitly refers to a downloaded copy of the source archive via a relative path.
  */
 public class SourceArtifactRefLocal
-    extends SourceArtifactRef
+    extends AbstractSourceArtifactRef
 {
-    public static final String SOURCE_ARCHIVE_LOCAL = SOURCE_ARCHIVE + " (local copy)";
+    public static final String SOURCE_ARCHIVE_LOCAL = "source archive (local copy)";
 
 
 
@@ -32,7 +32,7 @@ public class SourceArtifactRefLocal
 
     public SourceArtifactRefLocal(@Nonnull final ExternalReference pExternalReference)
     {
-        super(pExternalReference);
+        super(pExternalReference, ExternalReference.Type.DISTRIBUTION);
         pExternalReference.setComment(SOURCE_ARCHIVE_LOCAL);
     }
 
@@ -49,7 +49,7 @@ public class SourceArtifactRefLocal
     public static boolean isSourceReference(@Nullable final ExternalReference pExternalReference)
     {
         boolean result = pExternalReference != null
-            && SourceArtifactRef.isSourceReference(pExternalReference)
+            && pExternalReference.getType() == ExternalReference.Type.DISTRIBUTION
             && SOURCE_ARCHIVE_LOCAL.equals(pExternalReference.getComment());
         return result;
     }

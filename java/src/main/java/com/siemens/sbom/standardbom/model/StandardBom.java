@@ -15,10 +15,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.cyclonedx.model.Bom;
+import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
 import org.cyclonedx.model.ExternalReference;
 import org.cyclonedx.model.Metadata;
-import org.cyclonedx.model.Tool;
+import org.cyclonedx.model.OrganizationalEntity;
+import org.cyclonedx.model.definition.Definition;
+import org.cyclonedx.model.definition.Standard;
+import org.cyclonedx.model.metadata.ToolInformation;
 
 import com.siemens.sbom.standardbom.internal.PropertyProcessor;
 import com.siemens.sbom.standardbom.internal.VersionUtil;
@@ -37,6 +41,10 @@ public class StandardBom
      */
     public static final String CUSTOM_PROPERTY_NAMESPACE = "siemens";
 
+    public static final String SPEC_NAME = "Standard BOM";
+
+    private static final String SPEC_OWNER = "Siemens AG";
+
     private final PropertyProcessor metaPropProc;
 
     private final Bom cycloneDxSbom;
@@ -46,8 +54,8 @@ public class StandardBom
     public StandardBom()
     {
         this(new Bom());
-        getMetadata().addTool(getStandardBomSpecDescriptor());
-        getMetadata().addTool(getStandardBomJavaLibDescriptor());
+        getCycloneDxBom().setDefinitions(getStandardBomSpecDescriptor());
+        getMetadata().setToolChoice(getStandardBomJavaLibDescriptor());
     }
 
 
@@ -60,32 +68,49 @@ public class StandardBom
 
 
 
-    private Tool getStandardBomSpecDescriptor()
+    private Definition getStandardBomSpecDescriptor()
     {
-        final Tool result = new Tool();
-        result.setVendor("Siemens AG");
-        result.setName(VersionUtil.getSpecToolName());
-        result.setVersion(VersionUtil.getSpecVersion());
+        Standard standard = new Standard();
+        standard.setBomRef(VersionUtil.getSpecToolName());
+        standard.setName(SPEC_NAME);
+        standard.setVersion(VersionUtil.getSpecVersion());
+        standard.setDescription("Siemens SBOM Standard");
+        standard.setOwner(SPEC_OWNER);
+
         final ExternalReference website = new ExternalReference();
         website.setType(ExternalReference.Type.WEBSITE);
         website.setUrl(VersionUtil.getSpecWebsite());
-        result.setExternalReferences(Collections.singletonList(website));
+        standard.setExternalReferences(Collections.singletonList(website));
+
+        Definition result = new Definition();
+        List<Standard> standards = new ArrayList<>();  // stay mutable
+        standards.add(standard);
+        result.setStandards(standards);
         return result;
     }
 
 
 
-    private Tool getStandardBomJavaLibDescriptor()
+    private ToolInformation getStandardBomJavaLibDescriptor()
     {
-        final Tool result = new Tool();
-        result.setVendor("Siemens AG");
-        result.setName(VersionUtil.getLibraryToolName());
-        result.setVersion(VersionUtil.getLibraryVersion());
+        final Component javaLib = new Component();
+        javaLib.setGroup(VersionUtil.getLibraryGroup());
+        javaLib.setName(VersionUtil.getLibraryName());
+        javaLib.setVersion(VersionUtil.getLibraryVersion());
+        javaLib.setDescription(VersionUtil.getLibraryDescription());
+        OrganizationalEntity supplier = new OrganizationalEntity();
+        supplier.setName("Siemens AG");
+        javaLib.setSupplier(supplier);
+
         final ExternalReference website = new ExternalReference();
         website.setType(ExternalReference.Type.WEBSITE);
         website.setUrl(VersionUtil.getLibraryWebsite());
-        website.setComment("the Standard BOM library for Java");
-        result.setExternalReferences(Collections.singletonList(website));
+        javaLib.setExternalReferences(Collections.singletonList(website));
+
+        final ToolInformation result = new ToolInformation();
+        List<Component> components = new ArrayList<>();  // stay mutable
+        components.add(javaLib);
+        result.setComponents(components);
         return result;
     }
 
@@ -226,6 +251,34 @@ public class StandardBom
     public String getSerialNumber()
     {
         return cycloneDxSbom.getSerialNumber();
+    }
+
+
+
+    /**
+     * Determine if this SBOM contains a <a href="https://sbom.siemens.io/v3/format.html#definitionsstandards">Standard
+     * BOM declaration</a>, and if so, return its version number.
+     *
+     * @return the Standard BOM version number declared in this SBOM represented by this object, or <code>null</code>
+     * if no such information can be found
+     */
+    @CheckForNull
+    public String getStandardBomVersion()
+    {
+        String result = null;
+        Definition definitions = getCycloneDxBom().getDefinitions();
+        if (definitions != null) {
+            List<Standard> standards = definitions.getStandards();
+            if (standards != null) {
+                for (Standard standard : standards) {
+                    if (SPEC_NAME.equals(standard.getName()) && SPEC_OWNER.equals(standard.getOwner())) {
+                        result = standard.getVersion();
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 

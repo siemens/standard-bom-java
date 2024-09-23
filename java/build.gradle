@@ -50,7 +50,7 @@ ext {
 }
 
 group = 'com.siemens.sbom.standardbom'
-description = 'A standardized description of a Software Bill of Materials (SBOM) in CycloneDX format'
+description = 'Standard BOM helper library for Java'
 version = project.ext.gitVersion
 
 project.gradle.taskGraph.whenReady { taskGraph ->
@@ -65,13 +65,13 @@ project.gradle.taskGraph.whenReady { taskGraph ->
  */
 dependencies {
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-    api group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
-    api group: 'org.cyclonedx', name: 'cyclonedx-core-java', version: '7.3.2'
+    api group: 'org.slf4j', name: 'slf4j-api', version: '2.0.16'
+    api group: 'org.cyclonedx', name: 'cyclonedx-core-java', version: '9.0.5'
 
     testCompileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'commons-io', name: 'commons-io'
-    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j18-impl', version: '2.18.0'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: '2.24.0'
 }
 
 
@@ -115,9 +115,11 @@ tasks.register('createVersionFile') {
     doLast {
         Properties props = new Properties()
         props.setProperty('clean', String.valueOf(project.ext.gitCleanBuild))
-        props.setProperty('libName', "${project.group}:${project.name}")
+        props.setProperty('libGroup', project.group)
+        props.setProperty('libName', project.name)
         props.setProperty('libVersion', project.getVersion().toString())
         props.setProperty('libWebsite', "${project.ext.codeRepo}/-/tree/main/java")
+        props.setProperty('libDescription', project.description)
         props.setProperty('specName', project.name)
         props.setProperty('specVersion', project.ext.formatVersion)
         props.setProperty('specWebsite', project.ext.website)

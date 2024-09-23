@@ -17,28 +17,26 @@ import com.siemens.sbom.standardbom.internal.HashProcessor;
 /**
  * One entry in the list of source artifacts.
  */
-public class SourceArtifactRef
+public abstract class AbstractSourceArtifactRef
 {
-    public static final String SOURCE_ARCHIVE = "source archive";
-
     private final HashProcessor hashProc;
 
     private final ExternalReference cycloneDxRef;
 
 
 
-    protected SourceArtifactRef()
+    protected AbstractSourceArtifactRef()
     {
-        this(new ExternalReference());
+        this(new ExternalReference(), ExternalReference.Type.DISTRIBUTION);
     }
 
 
 
-    public SourceArtifactRef(@Nonnull final ExternalReference pCycloneDxRef)
+    protected AbstractSourceArtifactRef(@Nonnull final ExternalReference pCycloneDxRef,
+        @Nonnull final ExternalReference.Type pRefType)
     {
         cycloneDxRef = Objects.requireNonNull(pCycloneDxRef, "the CycloneDX delegate was null");
-        cycloneDxRef.setType(ExternalReference.Type.DISTRIBUTION);
-        cycloneDxRef.setComment(SOURCE_ARCHIVE);
+        cycloneDxRef.setType(Objects.requireNonNull(pRefType, "the external reference type was null"));
         hashProc = new HashProcessor(cycloneDxRef::getHashes, cycloneDxRef::addHash);
     }
 
@@ -47,9 +45,9 @@ public class SourceArtifactRef
     public static boolean isSourceReference(@Nullable final ExternalReference pExternalReference)
     {
         boolean result = pExternalReference != null
-            && pExternalReference.getType() == ExternalReference.Type.DISTRIBUTION
-            && pExternalReference.getComment() != null
-            && pExternalReference.getComment().startsWith(SOURCE_ARCHIVE);
+            && (pExternalReference.getType() == ExternalReference.Type.SOURCE_DISTRIBUTION
+            || (pExternalReference.getType() == ExternalReference.Type.DISTRIBUTION
+                && SourceArtifactRefLocal.SOURCE_ARCHIVE_LOCAL.equals(pExternalReference.getComment())));
         return result;
     }
 

@@ -19,11 +19,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 
+import org.cyclonedx.Version;
+import org.cyclonedx.exception.GeneratorException;
 import org.cyclonedx.exception.ParseException;
-import org.cyclonedx.generators.json.BomJsonGenerator14;
+import org.cyclonedx.generators.BomGeneratorFactory;
+import org.cyclonedx.generators.json.BomJsonGenerator;
 import org.cyclonedx.model.Bom;
 import org.cyclonedx.model.ExternalReference;
-import org.cyclonedx.parsers.JsonParser;
+import org.cyclonedx.parsers.BomParserFactory;
+import org.cyclonedx.parsers.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +94,8 @@ public class StandardBomParser
     {
         final byte[] jsonBytes = toByteArray(pJsonStream);
 
-        Bom bom = new JsonParser().parse(jsonBytes);
+        Parser jsonParser = BomParserFactory.createParser(jsonBytes);
+        Bom bom = jsonParser.parse(jsonBytes);
         StandardBom result = new StandardBom(bom);
 
         if (LOG.isDebugEnabled()) {
@@ -169,9 +174,10 @@ public class StandardBomParser
         String json = null;
         try {
             final Bom cycloneDxBom = pBom.getCycloneDxBom();
-            json = new BomJsonGenerator14(cycloneDxBom).toJsonString();
+            BomJsonGenerator generator = BomGeneratorFactory.createJson(Version.VERSION_16, cycloneDxBom);
+            json = generator.toJsonString();
         }
-        catch (RuntimeException e) {
+        catch (GeneratorException | RuntimeException e) {
             throw new StandardBomException("Failed to convert output to JSON", e);
         }
 

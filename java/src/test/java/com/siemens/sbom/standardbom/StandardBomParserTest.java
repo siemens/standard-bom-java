@@ -55,7 +55,7 @@ public class StandardBomParserTest
 
 
     @Test
-    public void testReadSunnyDay()
+    public void testReadSunnyDay16()
         throws IOException, ParseException
     {
         StandardBom parsed = parseFile("full-valid.json");
@@ -69,6 +69,26 @@ public class StandardBomParserTest
         Assert.assertEquals(9, parsed.getComponents().size());
         Assert.assertNotNull(parsed.getCycloneDxBom().getExternalReferences());
         Assert.assertEquals(1, parsed.getCycloneDxBom().getExternalReferences().size());
+        Assert.assertEquals("${formatVersion}", parsed.getStandardBomVersion());
+    }
+
+
+
+    @Test
+    public void testReadSunnyDay14()
+        throws IOException, ParseException
+    {
+        StandardBom parsed = parseFile("full-valid-1.4.json");
+
+        Assert.assertNotNull(parsed);
+        Assert.assertNotNull(parsed.getMetadata());
+        Assert.assertNotNull(parsed.getMetadata().getTools());
+        Assert.assertEquals(4, parsed.getMetadata().getTools().size());
+        Assert.assertEquals(new Date(1657292400000L), parsed.getMetadata().getTimestamp());
+        Assert.assertEquals(9, parsed.getComponents().size());
+        Assert.assertNotNull(parsed.getCycloneDxBom().getExternalReferences());
+        Assert.assertEquals(1, parsed.getCycloneDxBom().getExternalReferences().size());
+        Assert.assertEquals("${formatVersion}", parsed.getStandardBomVersion());
     }
 
 

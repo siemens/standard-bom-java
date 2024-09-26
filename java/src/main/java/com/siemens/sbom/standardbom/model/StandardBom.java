@@ -265,6 +265,18 @@ public class StandardBom
     @CheckForNull
     public String getStandardBomVersion()
     {
+        String result = getStandardBomVersionFromStandards();
+        if (result == null) {
+            result = getStandardBomVersionFromTools();
+        }
+        return result;
+    }
+
+
+
+    @CheckForNull
+    private String getStandardBomVersionFromStandards()
+    {
         String result = null;
         Definition definitions = getCycloneDxBom().getDefinitions();
         if (definitions != null) {
@@ -275,6 +287,25 @@ public class StandardBom
                         result = standard.getVersion();
                         break;
                     }
+                }
+            }
+        }
+        return result;
+    }
+
+
+
+    @CheckForNull
+    @SuppressWarnings("deprecation")  // "Tool" class used for interpreting Standard BOM v2 documents
+    private String getStandardBomVersionFromTools()
+    {
+        String result = null;
+        List<org.cyclonedx.model.Tool> tools = getMetadata().getTools();
+        if (tools != null) {
+            for (org.cyclonedx.model.Tool tool : tools) {
+                if ("standard-bom".equals(tool.getName()) && SPEC_OWNER.equals(tool.getVendor())) {
+                    result = tool.getVersion();
+                    break;
                 }
             }
         }

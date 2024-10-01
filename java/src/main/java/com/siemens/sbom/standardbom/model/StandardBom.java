@@ -74,7 +74,7 @@ public class StandardBom
         standard.setBomRef(VersionUtil.getSpecToolName());
         standard.setName(SPEC_NAME);
         standard.setVersion(VersionUtil.getSpecVersion());
-        standard.setDescription("Siemens SBOM Standard");
+        standard.setDescription("The Standard for Software Bills of Materials in Siemens");
         standard.setOwner(SPEC_OWNER);
 
         final ExternalReference website = new ExternalReference();

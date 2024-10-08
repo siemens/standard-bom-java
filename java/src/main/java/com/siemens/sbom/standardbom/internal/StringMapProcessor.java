@@ -9,11 +9,15 @@ import java.io.StringWriter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -41,12 +45,24 @@ public class StringMapProcessor
     private static class SortedProperties
         extends Properties
     {
+        @Nonnull
         @Override
         public synchronized Enumeration<Object> keys()
         {
             List<Object> keyList = Collections.list(super.keys());
             keyList.sort(Comparator.comparing(Object::toString));
             return Collections.enumeration(keyList);
+        }
+
+
+
+        @Nonnull
+        @Override
+        public Set<Map.Entry<Object, Object>> entrySet()
+        {
+            return Collections.synchronizedSet(super.entrySet().stream()
+                .sorted(Comparator.comparing(e -> e.getKey().toString()))
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
     }
 

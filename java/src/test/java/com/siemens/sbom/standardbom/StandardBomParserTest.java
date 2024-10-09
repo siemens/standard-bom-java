@@ -58,7 +58,7 @@ public class StandardBomParserTest
     public void testReadSunnyDay16()
         throws IOException, ParseException
     {
-        StandardBom parsed = parseFile("full-valid.json");
+        StandardBom parsed = parseFile("full-valid.cdx.json");
 
         Assert.assertNotNull(parsed);
         Assert.assertNotNull(parsed.getMetadata());
@@ -78,7 +78,7 @@ public class StandardBomParserTest
     public void testReadSunnyDay14()
         throws IOException, ParseException
     {
-        StandardBom parsed = parseFile("full-valid-1.4.json");
+        StandardBom parsed = parseFile("full-valid-1.4.cdx.json");
 
         Assert.assertNotNull(parsed);
         Assert.assertNotNull(parsed.getMetadata());
@@ -98,7 +98,7 @@ public class StandardBomParserTest
         throws IOException, URISyntaxException, ParseException
     {
         @SuppressWarnings("ConstantConditions")
-        final File jsonFile = new File(getClass().getResource("full-valid.json").toURI());
+        final File jsonFile = new File(getClass().getResource("full-valid.cdx.json").toURI());
 
         final StandardBom parsed = new StandardBomParser().parse(jsonFile);
 
@@ -120,7 +120,7 @@ public class StandardBomParserTest
         throws IOException, URISyntaxException, ParseException
     {
         @SuppressWarnings("ConstantConditions")
-        byte[] expected = Files.readAllBytes(Paths.get(getClass().getResource("full-valid.json").toURI()));
+        byte[] expected = Files.readAllBytes(Paths.get(getClass().getResource("full-valid.cdx.json").toURI()));
         String expectedStr = new String(expected, StandardCharsets.UTF_8);
         expectedStr = expectedStr.replaceAll(Pattern.quote("${libraryVersion}"),
             Matcher.quoteReplacement(LIBRARY_VERSION));
@@ -133,7 +133,7 @@ public class StandardBomParserTest
             parsed = new StandardBomParser().parse(bais);
         }
 
-        File outputFile = new File(tempDir.getRoot(), "test-output.json");
+        File outputFile = new File(tempDir.getRoot(), "test-output.cdx.json");
         new StandardBomParser().save(parsed, outputFile);
         final byte[] actual = Files.readAllBytes(Paths.get(outputFile.toURI()));
 
@@ -169,7 +169,7 @@ public class StandardBomParserTest
     public void testWriteJsonFailed()
         throws IOException
     {
-        File outputFile = new File(tempDir.getRoot(), "test-output2.json");
+        File outputFile = new File(tempDir.getRoot(), "test-output2.cdx.json");
         new StandardBomParser().save(new BrokenBom(), outputFile);
         Assert.fail("Expected exception was not thrown");
     }
@@ -182,7 +182,7 @@ public class StandardBomParserTest
     {
         Assume.assumeTrue(System.getProperty("os.name").contains("Windows"));  // test only works on Windows :-/
 
-        final File outputFile = new File(tempDir.getRoot(), "permission-denied.json");
+        final File outputFile = new File(tempDir.getRoot(), "permission-denied.cdx.json");
         Assert.assertTrue(outputFile.createNewFile());
         Assert.assertTrue(outputFile.setReadOnly());
         new StandardBomParser().save(new StandardBom(), outputFile);

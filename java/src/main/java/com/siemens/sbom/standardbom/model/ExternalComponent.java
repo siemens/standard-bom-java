@@ -34,6 +34,11 @@ public class ExternalComponent
 
     private static final Pattern PURL_PATTERN = Pattern.compile("pkg:[a-z]+/.+");
 
+    /** A PackageURL that SCP understands as "I don't know the purl". Still a valid purl which prevents the CycloneDX
+     *  serializer from skipping this object. We use this as a default value for the {@code url} field, until the
+     *  PackageURL specification introduces an official value for this case. */
+    public static final String UNKNOWN_PURL = "pkg:generic/com.siemens.scp/no-purl";
+
     private final ExternalReference cycloneDxRef;
 
     private final StringMapProcessor stringMapProc;
@@ -51,6 +56,7 @@ public class ExternalComponent
     {
         cycloneDxRef = Objects.requireNonNull(pCycloneDxRef, "CycloneDX delegate was null");
         cycloneDxRef.setType(ExternalReference.Type.OTHER);
+        cycloneDxRef.setUrl(UNKNOWN_PURL);
         stringMapProc = new StringMapProcessor(cycloneDxRef::getComment, cycloneDxRef::setComment);
     }
 

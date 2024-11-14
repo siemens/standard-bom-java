@@ -101,6 +101,7 @@ public class ExternalComponentTest
         ExternalComponent underTest = new ExternalComponent();
         underTest.setLegalRemark("test remark");
         Assert.assertEquals("test remark", underTest.getLegalRemark());
+        Assert.assertEquals(ExternalComponent.UNKNOWN_PURL, underTest.getUrl());
     }
 
 

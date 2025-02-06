@@ -183,6 +183,7 @@ public class StandardBomParser
 
         json = unescapeComponentFields(json);
         json = unescapeExtRefPurls(json);
+        json = removeEmptyServicesMetadata(json);
         return json.concat(System.lineSeparator());
     }
 
@@ -224,9 +225,18 @@ public class StandardBomParser
 
 
 
+    @Nonnull
     private String unescapeComponentFields(@Nonnull final String pJson)
     {
         return pJson.replaceAll(NEWLINE_TOKEN, Matcher.quoteReplacement("\\n"));
+    }
+
+
+
+    @Nonnull
+    private String removeEmptyServicesMetadata(@Nonnull final String pJson)
+    {
+        return pJson.replaceFirst(Pattern.quote("]," + System.lineSeparator() + "      \"services\" : [ ]"), "]");
     }
 
 

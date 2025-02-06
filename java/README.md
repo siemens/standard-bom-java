@@ -78,3 +78,10 @@ Run the build by executing
 
 Publish a new version of this library by pushing a protected version tag in the format `vX.Y.Z`. The CI jobs will do
 the rest.
+
+
+## License
+
+The Standard BOM library for Java is Inner Source under the [Siemens Inner Source License 1.4](../LICENSE.md).
+
+Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED

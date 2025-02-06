@@ -94,6 +94,7 @@ public class StandardBom
     private ToolInformation getStandardBomJavaLibDescriptor()
     {
         final Component javaLib = new Component();
+        javaLib.setType(Component.Type.LIBRARY);
         javaLib.setGroup(VersionUtil.getLibraryGroup());
         javaLib.setName(VersionUtil.getLibraryName());
         javaLib.setVersion(VersionUtil.getLibraryVersion());

@@ -114,15 +114,15 @@ tasks.register('createVersionFile') {
     outputs.file(outFile)
     doLast {
         Properties props = new Properties()
-        props.setProperty('clean', String.valueOf(project.ext.gitCleanBuild))
-        props.setProperty('libGroup', project.group)
-        props.setProperty('libName', project.name)
-        props.setProperty('libVersion', project.getVersion().toString())
-        props.setProperty('libWebsite', "${project.ext.codeRepo}/-/tree/main/java")
-        props.setProperty('libDescription', project.description)
-        props.setProperty('specName', project.name)
-        props.setProperty('specVersion', project.ext.formatVersion)
-        props.setProperty('specWebsite', project.ext.website)
+        props.setProperty('clean', String.valueOf(rootProject.ext.gitCleanBuild))
+        props.setProperty('libGroup', rootProject.group)
+        props.setProperty('libName', rootProject.name)
+        props.setProperty('libVersion', rootProject.getVersion().toString())
+        props.setProperty('libWebsite', "${rootProject.ext.codeRepo}/-/tree/main/java")
+        props.setProperty('libDescription', rootProject.description)
+        props.setProperty('specName', rootProject.name)
+        props.setProperty('specVersion', rootProject.ext.formatVersion)
+        props.setProperty('specWebsite', rootProject.ext.website)
         outFile.withPrintWriter('UTF-8', {
             props.store(it, rootProject.name + ' version information')
         })
@@ -178,7 +178,7 @@ tasks.named('jar').configure {
     }
     doFirst {
         manifest {
-            attributes 'Build-Timestamp': project.ext.buildTimestamp.toString()
+            attributes 'Build-Timestamp': rootProject.ext.buildTimestamp.toString()
         }
     }
 }
@@ -248,7 +248,7 @@ tasks.named('javadoc').configure {
  * - - - -  CHECKSTYLE  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 checkstyle {
-    toolVersion '8.27'
+    toolVersion = '8.27'
     showViolations = true
     ignoreFailures = false
 }

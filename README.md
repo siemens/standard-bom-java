@@ -82,6 +82,6 @@ the rest.
 
 ## License
 
-The Standard BOM library for Java is Inner Source under the [Siemens Inner Source License 1.4](../LICENSE.md).
+The Standard BOM library for Java is Open Source under the [MIT license](LICENSE).
 
 Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED

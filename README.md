@@ -82,6 +82,6 @@ the rest.
 
 ## License
 
-The Standard BOM library for Java is Open Source under the [MIT license](LICENSE).
+The Standard BOM library for Java is Open Source under the [MIT license](LICENSE) (SPDX-License-Identifier: MIT).
 
 Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED

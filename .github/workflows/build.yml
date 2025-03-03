@@ -1,0 +1,35 @@
+#
+# Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED
+#
+
+name: build
+
+on: [push, pull_request]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        container:
+            image: gradle:8.12.1-jdk8
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: versions
+              run: |
+                  echo PATH=${PATH}
+                  git --version
+                  echo JAVA_HOME=${JAVA_HOME}
+                  java -version
+                  gradle --version
+                  gradle javaToolchains
+
+            - name: build
+              run: |
+                  gradle --warning-mode all clean build
+
+            - name: codecov
+              uses: codecov/codecov-action@v5
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}

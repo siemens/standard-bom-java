@@ -1,0 +1,7 @@
+#
+# Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED
+#
+* text=auto
+
+# These are explicitly windows files and should use crlf
+*.bat  text eol=crlf

@@ -1,8 +1,6 @@
-# 'javadoc' branch
+# 'gh-pages' branch
 
-This branch is used to archive the generated Javadoc, so that it doesn't pollute the website folder.
+This branch is used to host the generated Javadoc.
 
-The contents of the *javadoc-publish* folder will be published on the website in a folder called `javadoc`,
-so, for example, we get <https://sbom.siemens.io/javadoc/v2.0.0/>.
-
-The latest Javadoc is accessible as <https://sbom.siemens.io/javadoc/latest/>.
+Javadoc is available per version or using 'latest', e.g. <https://siemens.github.io/standard-bom-java/v4.1.1/>
+or <https://siemens.github.io/standard-bom-java/latest/>.

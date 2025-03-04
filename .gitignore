@@ -18,13 +18,3 @@
 # VSCode
 bin/
 .vscode/
-
-# Files from the master branch (we don't want them on the 'pages' branch)
-/.gitattributes
-/src/
-/config/
-/BOM-Format.md
-/gradle/
-/gradle*
-/*.gradle
-/LICENSE.*

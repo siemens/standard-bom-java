@@ -24,7 +24,7 @@ dependencies {
 ## Usage
 
 The API is described in detail in the
-[Javadoc documentation](https://sbom.siemens.io/javadoc/latest/).
+[Javadoc documentation](https://siemens.github.io/standard-bom-java/latest/).
 
 Here are some examples:
 

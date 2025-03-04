@@ -215,14 +215,14 @@ javadocJar {
  * - - - -  JAVADOC  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 tasks.named('javadoc').configure {
-    title = project.name + " v${project.version}"
+    title = project.ext.publishedName + " v${project.version}"
     options.locale = 'en'
     options.encoding = 'UTF-8'
     options.docEncoding = 'UTF-8'
     options.charSet = 'UTF-8'
-    options.windowTitle = project.name
+    options.windowTitle = project.ext.publishedName
     options.noDeprecated = true
-    options.header = project.name + " v${project.version}"
+    options.header = project.ext.publishedName + " v${project.version}"
     options.links('https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.2/',
             'https://docs.oracle.com/javase/8/docs/api/',
             'https://cyclonedx.github.io/cyclonedx-core-java/')

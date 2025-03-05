@@ -16,7 +16,7 @@ TODO mention MavenCentral when publishing there is set up
 **build.gradle**
 ```groovy
 dependencies {
-    implementation 'com.siemens.sbom.standardbom:standard-bom:4.1.1'
+    implementation 'com.siemens.sbom.standardbom:standard-bom:4.1.2'
 }
 ```
 

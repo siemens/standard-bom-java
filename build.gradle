@@ -118,7 +118,7 @@ tasks.register('createVersionFile') {
         props.setProperty('libGroup', rootProject.group)
         props.setProperty('libName', rootProject.name)
         props.setProperty('libVersion', rootProject.getVersion().toString())
-        props.setProperty('libWebsite', "${rootProject.ext.codeRepo}/-/tree/main/java")
+        props.setProperty('libWebsite', rootProject.ext.codeRepo)
         props.setProperty('libDescription', rootProject.description)
         props.setProperty('specName', rootProject.name)
         props.setProperty('specVersion', rootProject.ext.formatVersion)

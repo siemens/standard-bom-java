@@ -1,23 +1,35 @@
 [![build](https://github.com/siemens/standard-bom-java/actions/workflows/build.yml/badge.svg)](https://github.com/siemens/standard-bom-java/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/siemens/standard-bom-java/graph/badge.svg?token=03UC0U5M10)](https://codecov.io/gh/siemens/standard-bom-java)
+[![Maven Central](https://img.shields.io/maven-central/v/com.siemens.sbom.standardbom/standard-bom)](https://central.sonatype.com/artifact/com.siemens.sbom.standardbom/standard-bom)
+
 
 # Standard BOM for Java
 
 A Java library for creating and consuming documents in
-[standard-bom format](https://sbom.siemens.io/latest/format.html).
+[standard-bom format](https://sbom.siemens.io/latest/format.html). "Standard BOM" is our Siemens-internal SBOM
+format. Every Standard BOM document is a 100% [CycloneDX](https://cyclonedx.org/) document, so consumers who do not
+know about Stanard BOM can just treat it as CycloneDX and be happy.
 
 
 ## Build script config
 
-In order to use the Java library in your project, add it to your Gradle or Maven build.
+In order to use the Java library in your project, add it to your Gradle or Maven build. We publish on Maven Central,
+so no special configuration is needed.
 
-TODO mention MavenCentral when publishing there is set up
-
-**build.gradle**
+**Gradle**
 ```groovy
 dependencies {
     implementation 'com.siemens.sbom.standardbom:standard-bom:4.1.2'
 }
+```
+
+**Maven**
+```xml
+<dependency>
+    <groupId>com.siemens.sbom.standardbom</groupId>
+    <artifactId>standard-bom</artifactId>
+    <version>4.1.2</version>
+</dependency>
 ```
 
 
@@ -78,9 +90,6 @@ Run the build by executing
 ```
 ./gradlew clean build
 ```
-
-Publish a new version of this library by pushing a protected version tag in the format `vX.Y.Z`. The CI jobs will do
-the rest.
 
 
 ## License

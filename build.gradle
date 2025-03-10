@@ -297,7 +297,7 @@ publishing {
                 licenses {
                     license {
                         name = 'MIT'
-                        url = 'https://raw.githubusercontent.com/siemens/standard-bom-java/refs/tags/' +
+                        url = 'https://raw.githubusercontent.com/siemens/standard-bom-java/refs/tags/v' +
                                 project.version + '/LICENSE'
                     }
                 }

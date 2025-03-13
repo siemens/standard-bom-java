@@ -184,7 +184,30 @@ public class StandardBomParser
         json = unescapeComponentFields(json);
         json = unescapeExtRefPurls(json);
         json = removeEmptyServicesMetadata(json);
+        json = injectSchemaSpec(json);
         return json.concat(System.lineSeparator());
+    }
+
+
+
+    @Nonnull
+    private String injectSchemaSpec(@Nonnull String json)
+    {
+        String schemaAttribute = "  \"$schema\": \"http://cyclonedx.org/schema/bom-1.6.schema.json\","
+            .concat(System.lineSeparator());
+
+        // Check if $schema attribute already exists
+        if (json.contains("\"$schema\"")) {
+            return json;
+        }
+
+        // Find the position right after the opening curly brace
+        int insertPosition = json.indexOf("{\n") + 2;
+
+        // Insert the $schema attribute at the found position
+        StringBuilder sb = new StringBuilder(json);
+        sb.insert(insertPosition, schemaAttribute);
+        return sb.toString();
     }
 
 

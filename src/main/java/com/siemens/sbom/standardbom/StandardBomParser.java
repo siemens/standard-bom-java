@@ -191,21 +191,22 @@ public class StandardBomParser
 
 
     @Nonnull
-    private String injectSchemaSpec(@Nonnull String json)
+    private String injectSchemaSpec(@Nonnull final String pJson)
     {
         String schemaAttribute = "  \"$schema\": \"http://cyclonedx.org/schema/bom-1.6.schema.json\","
             .concat(System.lineSeparator());
 
         // Check if $schema attribute already exists
-        if (json.contains("\"$schema\"")) {
-            return json;
+        if (pJson.contains("\"$schema\"")) {
+            return pJson;
         }
 
         // Find the position right after the opening curly brace
-        int insertPosition = json.indexOf("{\n") + 2;
+        final String insertMarker = '{' + System.lineSeparator();
+        int insertPosition = pJson.indexOf(insertMarker) + insertMarker.length();
 
         // Insert the $schema attribute at the found position
-        StringBuilder sb = new StringBuilder(json);
+        StringBuilder sb = new StringBuilder(pJson);
         sb.insert(insertPosition, schemaAttribute);
         return sb.toString();
     }

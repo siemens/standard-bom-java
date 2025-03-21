@@ -121,7 +121,7 @@ tasks.register('createVersionFile') {
         props.setProperty('libVersion', rootProject.getVersion().toString())
         props.setProperty('libWebsite', rootProject.ext.codeRepo)
         props.setProperty('libDescription', rootProject.description)
-        props.setProperty('specName', rootProject.name)
+        props.setProperty('specName', project.ext.publishedName)
         props.setProperty('specVersion', rootProject.ext.formatVersion)
         props.setProperty('specWebsite', rootProject.ext.website)
         outFile.withPrintWriter('UTF-8', {

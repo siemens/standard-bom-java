@@ -46,7 +46,7 @@ public final class VersionUtil
 
 
 
-    public static String getSpecToolName()
+    public static String getSpecName()
     {
         return VERSION_PROPS.getProperty("specName");
     }

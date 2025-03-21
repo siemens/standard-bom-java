@@ -71,7 +71,7 @@ public class StandardBom
     private Definition getStandardBomSpecDescriptor()
     {
         Standard standard = new Standard();
-        standard.setBomRef(VersionUtil.getSpecToolName());
+        standard.setBomRef(VersionUtil.getSpecName());
         standard.setName(SPEC_NAME);
         standard.setVersion(VersionUtil.getSpecVersion());
         standard.setDescription("The Standard for Software Bills of Materials in Siemens");

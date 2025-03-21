@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Implementation-Title: standard-bom
+Website: https://sbom.siemens.io/
+Implementation-Version: 4.1.2
+Build-Timestamp: Thu Mar 06 17:28:03 CET 2025
+Built-By: z003y64w
+Build-Clean: true
+Specification-Vendor: Siemens AG
+Specification-Title: standard-bom
+Implementation-Vendor-Id: com.siemens
+Implementation-Vendor: Siemens AG
+Implementation-SCM-Revision: 19a8bfac10f7e931856a573f24c9d34059eb28bb
+Specification-Vendor-Id: com.siemens
+Specification-Version: 4.1.2
+Created-By: Gradle 8.12.1
+Build-Jdk: 1.8.0_332 (Temurin 25.332-b09)
+

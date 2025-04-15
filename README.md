@@ -8,7 +8,7 @@
 A Java library for creating and consuming documents in
 [standard-bom format](https://sbom.siemens.io/latest/format.html). "Standard BOM" is our Siemens-internal SBOM
 format. Every Standard BOM document is a 100% [CycloneDX](https://cyclonedx.org/) document, so consumers who do not
-know about Stanard BOM can just treat it as CycloneDX and be happy.
+know about Standard BOM can just treat it as CycloneDX and be happy.
 
 
 ## Build script config

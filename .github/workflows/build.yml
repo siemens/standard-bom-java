@@ -10,7 +10,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         container:
-            image: gradle:8.12.1-jdk8
+            image: gradle:8.14.3-jdk8
         steps:
             - uses: actions/checkout@v4
               with:

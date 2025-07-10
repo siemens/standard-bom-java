@@ -14,7 +14,7 @@ know about Standard BOM can just treat it as CycloneDX and be happy.
 
 ## Build script config
 
-In order to use the Java library in your project, add it to your Gradle or Maven build. We publish on Maven Central,
+In order to use the Java library in your project, add it to your Gradle or Maven build. We publish to Maven Central,
 so no special configuration is needed.
 
 **Gradle**
@@ -80,11 +80,7 @@ In order to build this library on your local PC, and/or contribute to this libra
 1. **Java** - make sure [JDK 8](https://adoptium.net/temurin/releases/?version=8) is available on your system, and
    the `JAVA_HOME` environment variable points to it.
 
-2. **Gradle environment variable** - `GRADLE_USER_HOME` should be set globally to a directory like
-   C:/Users/xxxx/.gradle (`xxxx` being your user ID; you might want to use backslashes on Windows). Create the
-   directory if it doesn't exist.  
-   Note that you *must not* install Gradle manually. If you have a manual Gradle installation on your machine, remove
-   it.
+2. **Gradle** - We use the Gradle Wrapper, so there is nothing to install.
 
 Run the build by executing
 

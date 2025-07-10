@@ -163,7 +163,7 @@ tasks.named('jar').configure {
                 'Specification-Title'        : project.ext.publishedName,
                 'Specification-Vendor'       : 'Siemens AG',
                 'Specification-Vendor-Id'    : 'com.siemens',
-                'Specification-Version'      : project.version,
+                'Specification-Version'      : project.ext.formatVersion,
                 'Implementation-Title'       : project.ext.publishedName,
                 'Implementation-Vendor'      : 'Siemens AG',
                 'Implementation-Vendor-Id'   : 'com.siemens',

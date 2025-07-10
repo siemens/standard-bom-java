@@ -402,6 +402,21 @@ public class BomEntry
 
 
     @CheckForNull
+    public Component.Scope getScope()
+    {
+        return cycloneDxComponent.getScope();
+    }
+
+
+
+    public void setScope(@Nullable final Component.Scope pScope)
+    {
+        cycloneDxComponent.setScope(pScope);
+    }
+
+
+
+    @CheckForNull
     public Boolean isInternal()
     {
         String v = propertyProc.get(CustomProperty.INTERNAL);

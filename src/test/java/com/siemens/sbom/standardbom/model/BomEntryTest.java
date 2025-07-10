@@ -4,6 +4,7 @@
 package com.siemens.sbom.standardbom.model;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,6 +12,7 @@ import org.cyclonedx.model.Component;
 import org.cyclonedx.model.ExternalReference;
 import org.cyclonedx.model.Hash;
 import org.cyclonedx.model.License;
+import org.cyclonedx.model.OrganizationalContact;
 import org.cyclonedx.model.Property;
 import org.junit.Assert;
 import org.junit.Test;
@@ -313,5 +315,33 @@ public class BomEntryTest
         catch (IllegalArgumentException e) {
             Assert.assertEquals("value is not a valid SHA-256 hash: INVALID HASH CODE", e.getMessage());
         }
+    }
+
+
+
+    @Test
+    public void testAuthors()
+    {
+        BomEntry underTest = new BomEntry();
+        underTest.setAuthors(null);
+
+        OrganizationalContact authorX = new OrganizationalContact();
+        authorX.setName("authorX");
+        authorX.setEmail("authorX@example.com");
+        underTest.setAuthors(Collections.singletonList(authorX));
+
+        OrganizationalContact author1 = new OrganizationalContact();
+        author1.setName("author1");
+        author1.setEmail("author1@example.com");
+        underTest.setAuthors(Collections.singletonList(author1));
+
+        underTest.addAuthor("author2", null);
+        underTest.addAuthor(null, "author3@example.com");
+        underTest.addAuthor(null, null);
+
+        List<OrganizationalContact> actualAuthors = underTest.getAuthors();
+        Assert.assertEquals(3, actualAuthors.size());
+        Assert.assertEquals(author1,
+            actualAuthors.stream().filter(a -> a.getName().equals("author1")).findFirst().orElse(null));
     }
 }

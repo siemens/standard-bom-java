@@ -194,7 +194,7 @@ public class BomEntry
 
     public void setAuthors(@Nullable final List<OrganizationalContact> pNewAuthors)
     {
-        cycloneDxComponent.setAuthors(pNewAuthors);
+        cycloneDxComponent.setAuthors(pNewAuthors != null ? new ArrayList<>(pNewAuthors) : null);
     }
 
 

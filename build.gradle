@@ -277,7 +277,7 @@ publishing {
         if (project.hasProperty('SB_SONATYPE_USER') && project.hasProperty('SB_SONATYPE_PASSWORD')) {
             maven {
                 name = 'mavenCentralStaging'
-                url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+                url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
                 credentials {
                     username = project.getProperty('SB_SONATYPE_USER')
                     password = project.getProperty('SB_SONATYPE_PASSWORD')

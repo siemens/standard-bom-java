@@ -1,6 +1,6 @@
 [![build](https://github.com/siemens/standard-bom-java/actions/workflows/build.yml/badge.svg)](https://github.com/siemens/standard-bom-java/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/siemens/standard-bom-java/graph/badge.svg?token=03UC0U5M10)](https://codecov.io/gh/siemens/standard-bom-java)
-[![Standard BOM](https://img.shields.io/badge/Standard%20BOM-v3.0.0-1f425f.svg)](https://code.siemens.com/sbom/standard-bom/-/releases/v3.0.0)
+[![Standard BOM](https://img.shields.io/badge/Standard%20BOM-v3.1.0-1f425f.svg)](https://code.siemens.com/sbom/standard-bom/-/releases/v3.1.0)
 [![Maven Central](https://img.shields.io/maven-central/v/com.siemens.sbom.standardbom/standard-bom)](https://central.sonatype.com/artifact/com.siemens.sbom.standardbom/standard-bom)
 
 

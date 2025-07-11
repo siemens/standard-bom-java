@@ -311,7 +311,7 @@ publishing {
                 scm {
                     connection = 'scm:git:' + ga
                     developerConnection = 'scm:git:' + ga
-                    url = ga
+                    url = 'https://github.com/siemens/standard-bom-java'
                 }
             }
         }

@@ -18,7 +18,6 @@ repositories {
     mavenCentral()
 }
 
-
 import org.gradle.internal.jvm.Jvm
 
 /*
@@ -44,6 +43,7 @@ ext {
     publishedName = 'standard-bom'
     website = 'https://sbom.siemens.io/'
     codeRepo = 'https://github.com/siemens/standard-bom-java'
+    mavenCentralNamespace = 'com.siemens.sbom'
 
     // The version of the spec we are currently implementing.
     // Must correspond to an existing tag, without the leading 'v', or validation may fail later!
@@ -268,13 +268,17 @@ dependencies {
 /*
  * - - - -  PUBLISHING  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+def hasSonatypeCredentials() {
+    return project.hasProperty('SB_SONATYPE_USER') && project.hasProperty('SB_SONATYPE_PASSWORD')
+}
+
 publishing {
     repositories {
         maven {
             name = 'localBuildDir'
             url = project.layout.buildDirectory.dir('maven-repo-test')
         }
-        if (project.hasProperty('SB_SONATYPE_USER') && project.hasProperty('SB_SONATYPE_PASSWORD')) {
+        if (hasSonatypeCredentials()) {
             maven {
                 name = 'mavenCentralStaging'
                 url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
@@ -329,5 +333,41 @@ if (!Boolean.parseBoolean(System.getenv('CI')) || project.hasProperty('signingKe
             useGpgCmd()   // use local GPG installation and agent
         }
         sign publishing.publications.mavenJava
+    }
+}
+
+if (hasSonatypeCredentials()) {
+    tasks.register('completeMavenCentralDeployment') {
+        group = PublishingPlugin.PUBLISH_TASK_GROUP
+        description = 'Completes the MavenCentral deployment after running normal publishing'
+
+        String bearerToken = project.getProperty('SB_SONATYPE_USER') + ':' + project.getProperty('SB_SONATYPE_PASSWORD')
+        bearerToken = Base64.encoder.encodeToString(bearerToken.getBytes('UTF-8'))
+
+        doLast {
+            def connection = new URL('https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/'
+                + project.ext.mavenCentralNamespace + '?publishing_type=automatic').openConnection() as HttpURLConnection
+            try {
+                connection.with {
+                    requestMethod = 'POST'
+                    doOutput = false
+                    setRequestProperty('Authorization', "Bearer ${bearerToken}")
+
+                    int responseCode = getResponseCode()
+                    if (responseCode == 200) {
+                        logger.lifecycle('MavenCentral deployment completed. '
+                            + 'Details at https://central.sonatype.com/publishing/deployments')
+                    } else {
+                        throw new GradleException("Request failed with status ${responseCode}")
+                    }
+                }
+            } finally {
+                connection.disconnect()
+            }
+        }
+    }
+
+    tasks.named('publishAllPublicationsToMavenCentralStagingRepository') {
+        it.finalizedBy(tasks.named('completeMavenCentralDeployment'))
     }
 }

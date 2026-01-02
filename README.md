@@ -20,7 +20,7 @@ so no special configuration is needed.
 **Gradle**
 ```groovy
 dependencies {
-    implementation 'com.siemens.sbom.standardbom:standard-bom:4.2.0'
+    implementation 'com.siemens.sbom.standardbom:standard-bom:4.2.1'
 }
 ```
 
@@ -29,7 +29,7 @@ dependencies {
 <dependency>
     <groupId>com.siemens.sbom.standardbom</groupId>
     <artifactId>standard-bom</artifactId>
-    <version>4.2.0</version>
+    <version>4.2.1</version>
 </dependency>
 ```
 

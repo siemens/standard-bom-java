@@ -12,8 +12,8 @@ plugins {
     id 'signing'
     id 'maven-publish'
     id 'org.ajoberstar.grgit' version '4.1.1'
-    id 'org.barfuin.gradle.jacocolog' version '3.1.0'
-    id 'org.barfuin.gradle.taskinfo' version '2.2.1'
+    id 'org.barfuin.gradle.jacocolog' version '4.0.0'
+    id 'org.barfuin.gradle.taskinfo' version '3.0.1'
 }
 
 repositories {
@@ -67,14 +67,14 @@ project.gradle.taskGraph.whenReady { taskGraph ->
  * - - - -  DEPENDENCIES  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 dependencies {
-    compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-    api group: 'org.cyclonedx', name: 'cyclonedx-core-java', version: '11.0.1'
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.17'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    api 'org.cyclonedx:cyclonedx-core-java:11.0.1'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
 
-    testCompileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    testImplementation group: 'commons-io', name: 'commons-io'
-    testRuntimeOnly group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: '2.25.3'
+    testCompileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'commons-io:commons-io'
+    testRuntimeOnly 'org.apache.logging.log4j:log4j-slf4j2-impl:2.25.3'
 }
 
 
@@ -242,7 +242,7 @@ tasks.named('javadoc').configure {
     // workaround for JDK 9+: https://github.com/gradle/gradle/issues/11182
     def currentJavaVersion = JavaVersion.current()
     if (currentJavaVersion >= JavaVersion.VERSION_1_9) {
-        options.addStringOption("-release", "8")
+        options.addStringOption("source", "8")
     }
 }
 
@@ -263,7 +263,7 @@ project.extensions.findByName('checkstyle').sourceSets.each { SourceSet s ->
 
 dependencies {
     checkstyle "com.puppycrawl.tools:checkstyle:${project.extensions.checkstyle.toolVersion}"
-    checkstyle group: 'com.github.sevntu-checkstyle', name: 'sevntu-checks', version: '1.37.0'
+    checkstyle 'com.github.sevntu-checkstyle:sevntu-checks:1.37.0'
 }
 
 

@@ -77,8 +77,9 @@ The output format will always be the current version of the format.
 
 In order to build this library on your local PC, and/or contribute to this library, mind the following prerequisites:
 
-1. **Java** - make sure [JDK 8](https://adoptium.net/temurin/releases/?version=8) is available on your system, and
-   the `JAVA_HOME` environment variable points to it.
+1. **Java** - make sure both [JDK 8](https://adoptium.net/temurin/releases/?version=8) and
+   [JDK 17](https://adoptium.net/temurin/releases/?version=17) are available on your system. The `JAVA_HOME`
+   environment variable should point to the JDK17, because it is used by Gradle. JDK8 is needed for compilation.
 
 2. **Gradle** - We use the Gradle Wrapper, so there is nothing to install.
 

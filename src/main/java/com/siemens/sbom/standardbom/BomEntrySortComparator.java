@@ -1,5 +1,7 @@
 /*
  * Copyright (c) Siemens AG 2019-2026 ALL RIGHTS RESERVED
+ *
+ * SPDX-License-Identifier: MIT
  */
 package com.siemens.sbom.standardbom;
 

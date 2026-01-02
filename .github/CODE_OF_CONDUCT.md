@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED
+SPDX-FileCopyrightText: Copyright (c) Siemens AG 2019-2026 ALL RIGHTS RESERVED
 SPDX-License-Identifier: MIT
 
 This source code is licensed under the MIT license found in the

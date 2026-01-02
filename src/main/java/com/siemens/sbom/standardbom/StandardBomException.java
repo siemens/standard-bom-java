@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Siemens AG 2019-2025 ALL RIGHTS RESERVED
+ * Copyright (c) Siemens AG 2019-2026 ALL RIGHTS RESERVED
  */
 package com.siemens.sbom.standardbom;
 

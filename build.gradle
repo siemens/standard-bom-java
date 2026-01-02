@@ -348,7 +348,8 @@ if (hasSonatypeCredentials()) {
 
         doLast {
             def connection = new URL('https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/'
-                + project.ext.mavenCentralNamespace + '?publishing_type=automatic').openConnection() as HttpURLConnection
+                + rootProject.ext.mavenCentralNamespace + '?publishing_type=automatic')
+                .openConnection() as HttpURLConnection
             try {
                 connection.with {
                     requestMethod = 'POST'

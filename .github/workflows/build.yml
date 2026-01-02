@@ -40,7 +40,7 @@ jobs:
                   echo '---'
                   ${JAVA_HOME_8_X64}/bin/java -version
                   echo '---'
-                  export EXTRA_JDKS="-Porg.gradle.java.installations.paths=${JAVA_HOME_8_X64}"
+                  export EXTRA_JDKS="-Dorg.gradle.java.installations.paths=${JAVA_HOME_8_X64}"
                   echo "EXTRA_JDKS=${EXTRA_JDKS}" >> "$GITHUB_ENV"
                   gradle ${EXTRA_JDKS} javaToolchains
 

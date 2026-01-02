@@ -1,0 +1,183 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat" : "CycloneDX",
+  "specVersion" : "1.6",
+  "serialNumber" : "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version" : 1,
+  "metadata" : {
+    "timestamp" : "2026-01-02T12:00:00Z",
+    "tools" : {
+      "components" : [
+        {
+          "type" : "library",
+          "supplier" : {
+            "name" : "Siemens AG"
+          },
+          "group" : "com.siemens.sbom.standardbom",
+          "name" : "standard-bom-java",
+          "version" : "${libraryVersion}",
+          "description" : "Standard BOM helper library for Java",
+          "externalReferences" : [
+            {
+              "type" : "website",
+              "url" : "https://github.com/siemens/standard-bom-java"
+            }
+          ]
+        }
+      ]
+    },
+    "component" : {
+      "group" : "com.example",
+      "name" : "primary",
+      "version" : "2.0.0",
+      "description" : "Description of the primary component"
+    },
+    "supplier" : {
+      "name" : "ACME"
+    },
+    "properties" : [
+      {
+        "name" : "siemens:sbomNature",
+        "value" : "binary"
+      },
+      {
+        "name" : "siemens:profile",
+        "value" : "clearing"
+      }
+    ]
+  },
+  "components" : [
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.siemens.sbom/component1@1.0.0",
+      "authors" : [
+        {
+          "name" : "author1",
+          "email" : "author1@example.com"
+        },
+        {
+          "name" : "author2",
+          "email" : "author2@example.com"
+        }
+      ],
+      "group" : "com.siemens.sbom",
+      "name" : "component1",
+      "version" : "1.0.0",
+      "description" : "This is the description of component1",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "15f41a7cddbf60f741bc49966c38f75b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "d771af8e336e372fb5399c99edabe0919aeaf5b2"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "The Apache Software License, version 2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        },
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://www.opensource.org/licenses/mit-license.php"
+          }
+        }
+      ],
+      "copyright" : "(c) the copyright holders",
+      "cpe" : "cpe:2.3:a:com.siemens.sbom:component1:-:*:*:*:*:*:*:*",
+      "purl" : "pkg:maven/com.siemens.sbom/component1@1.0.0",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://example.com"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://example.com/component1.git"
+        },
+        {
+          "type" : "distribution",
+          "url" : "file:///binaries/d771af8e336e372fb5399c99edabe0919aeaf5b2/component1.jar",
+          "comment" : "relativePath"
+        },
+        {
+          "type" : "source-distribution",
+          "url" : "https://example.com/sources/component1-sources.jar",
+          "hashes" : [
+            {
+              "alg" : "MD5",
+              "content" : "11141a7cddbf60f741bc49966c38f111"
+            },
+            {
+              "alg" : "SHA-1",
+              "content" : "7771af8e336e372fb5399c99edabe0919aeaf777"
+            }
+          ]
+        },
+        {
+          "type" : "distribution",
+          "url" : "file:///sources/7771af8e336e372fb5399c99edabe0919aeaf777/component1-sources.jar",
+          "comment" : "source archive (local copy)",
+          "hashes" : [
+            {
+              "alg" : "MD5",
+              "content" : "11141a7cddbf60f741bc49966c38f111"
+            },
+            {
+              "alg" : "SHA-1",
+              "content" : "7771af8e336e372fb5399c99edabe0919aeaf777"
+            }
+          ]
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "siemens:direct",
+          "value" : "true"
+        },
+        {
+          "name" : "siemens:filename",
+          "value" : "component1.jar"
+        },
+        {
+          "name" : "siemens:internal",
+          "value" : "false"
+        },
+        {
+          "name" : "siemens:legalRemark",
+          "value" : "a legal remark"
+        },
+        {
+          "name" : "siemens:primaryLanguage",
+          "value" : "Java"
+        },
+        {
+          "name" : "siemens:thirdPartyNotices",
+          "value" : "line1\nline2\nline3"
+        }
+      ]
+    }
+  ],
+  "definitions" : {
+    "standards" : [
+      {
+        "name" : "Standard BOM",
+        "version" : "${formatVersion}",
+        "description" : "The Standard for Software Bills of Materials in Siemens",
+        "owner" : "Siemens AG",
+        "externalReferences" : [
+          {
+            "type" : "website",
+            "url" : "https://sbom.siemens.io/"
+          }
+        ],
+        "bom-ref" : "standard-bom"
+      }
+    ]
+  }
+}

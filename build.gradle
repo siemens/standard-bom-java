@@ -270,7 +270,7 @@ dependencies {
  * - - - -  PUBLISHING  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 def hasSonatypeCredentials() {
-    return project.hasProperty('SB_SONATYPE_USER') && project.hasProperty('SB_SONATYPE_PASSWORD')
+    return rootProject.hasProperty('SB_SONATYPE_USER') && rootProject.hasProperty('SB_SONATYPE_PASSWORD')
 }
 
 publishing {
@@ -284,8 +284,8 @@ publishing {
                 name = 'mavenCentralStaging'
                 url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
                 credentials {
-                    username = project.getProperty('SB_SONATYPE_USER')
-                    password = project.getProperty('SB_SONATYPE_PASSWORD')
+                    username = rootProject.getProperty('SB_SONATYPE_USER')
+                    password = rootProject.getProperty('SB_SONATYPE_PASSWORD')
                 }
             }
         }
@@ -323,11 +323,11 @@ publishing {
     }
 }
 
-if (!Boolean.parseBoolean(System.getenv('CI')) || project.hasProperty('signingKey')) {
+if (!Boolean.parseBoolean(System.getenv('CI')) || rootProject.hasProperty('SB_SIGNING_KEY')) {
     signing {
         if (Boolean.parseBoolean(System.getenv('CI'))) {
-            def signingKey = project.getProperty('signingKey')
-            def signingPassword = project.getProperty('signingPassword')
+            def signingKey = rootProject.getProperty('SB_SIGNING_KEY')
+            def signingPassword = rootProject.getProperty('SB_SIGNING_PASSWORD')
             useInMemoryPgpKeys(signingKey, signingPassword)
         }
         else {

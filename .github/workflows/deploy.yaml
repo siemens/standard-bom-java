@@ -1,0 +1,89 @@
+#
+# SPDX-FileCopyrightText: Copyright (c) Siemens AG 2019-2026 ALL RIGHTS RESERVED
+# SPDX-License-Identifier: MIT
+#
+
+name: deploy
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+permissions:
+    contents: write
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        container:
+            image: gradle:9.2.1-jdk17
+        env:
+            ORG_GRADLE_PROJECT_SB_SONATYPE_PASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_SB_SONATYPE_PASSWORD }}
+            ORG_GRADLE_PROJECT_SB_SONATYPE_USER: ${{ secrets.ORG_GRADLE_PROJECT_SB_SONATYPE_USER }}
+            ORG_GRADLE_PROJECT_SB_SIGNING_KEY: ${{ secrets.ORG_GRADLE_PROJECT_SB_SIGNING_KEY }}
+            ORG_GRADLE_PROJECT_SB_SIGNING_PASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_SB_SIGNING_PASSWORD }}
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+                  fetch-tags: true
+
+            - name: 'save-env'
+              run: |
+                  echo "SAVE_JAVA_HOME=${JAVA_HOME}" >> "$GITHUB_ENV"
+                  echo "SAVE_PATH=${PATH}" >> "$GITHUB_ENV"
+
+            - name: 'add-jdk8'
+              uses: actions/setup-java@v5
+              with:
+                  distribution: temurin
+                  java-version: 8
+
+            - name: versions
+              run: |
+                  export JAVA_HOME=$SAVE_JAVA_HOME
+                  echo JAVA_HOME=${JAVA_HOME}
+                  export PATH=$SAVE_PATH
+                  echo PATH=${PATH}
+                  git --version
+                  echo '---'
+                  java -version
+                  echo '---'
+                  ${JAVA_HOME_8_X64}/bin/java -version
+                  echo '---'
+                  export EXTRA_JDKS="-Dorg.gradle.java.installations.paths=${JAVA_HOME_8_X64}"
+                  echo "EXTRA_JDKS=${EXTRA_JDKS}" >> "$GITHUB_ENV"
+                  gradle ${EXTRA_JDKS} javaToolchains
+
+            - name: publish
+              run: |
+                  export JAVA_HOME=$SAVE_JAVA_HOME
+                  export PATH=$SAVE_PATH
+                  gradle ${EXTRA_JDKS} --warning-mode all clean build publishAllPublicationsToMavenCentralStagingRepository
+
+            - name: publish javadoc
+              env:
+                  GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+                  GIT_AUTHOR_NAME: github-actions[bot]
+                  GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+                  GIT_COMMITTER_NAME: github-actions[bot]
+              run: |
+                  VERSION_TAG="${GITHUB_REF_NAME}"
+                  PAGES_DIR="${RUNNER_TEMP}/gh-pages"
+
+                  git fetch origin gh-pages
+                  git worktree add -B gh-pages "$PAGES_DIR" origin/gh-pages
+
+                  rm -rf "$PAGES_DIR/$VERSION_TAG" "$PAGES_DIR/latest"
+                  mkdir -p "$PAGES_DIR/$VERSION_TAG"
+                  cp -a build/docs/javadoc/. "$PAGES_DIR/$VERSION_TAG"/
+                  ln -s "$VERSION_TAG" "$PAGES_DIR/latest"
+
+                  git -C "$PAGES_DIR" add -- "$VERSION_TAG" latest
+                  if git -C "$PAGES_DIR" diff --cached --quiet; then
+                      echo "Javadoc for $VERSION_TAG is already up to date."
+                  else
+                      git -C "$PAGES_DIR" commit -m "Add Javadoc of $VERSION_TAG"
+                      git -C "$PAGES_DIR" push origin HEAD:gh-pages
+                  fi

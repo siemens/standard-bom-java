@@ -11,8 +11,8 @@ plugins {
     id 'signing'
     id 'maven-publish'
     id 'org.ajoberstar.grgit' version '4.1.1'
-    id 'org.barfuin.gradle.jacocolog' version '4.0.0'
-    id 'org.barfuin.gradle.taskinfo' version '3.0.1'
+    id 'org.barfuin.gradle.jacocolog' version '4.0.2'
+    id 'org.barfuin.gradle.taskinfo' version '3.0.2'
 }
 
 repositories {
@@ -67,13 +67,13 @@ project.gradle.taskGraph.whenReady { taskGraph ->
  */
 dependencies {
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    api 'org.cyclonedx:cyclonedx-core-java:11.0.1'
-    implementation 'org.slf4j:slf4j-api:2.0.17'
+    api 'org.cyclonedx:cyclonedx-core-java:12.2.0'
+    implementation 'org.slf4j:slf4j-api:2.0.18'
 
     testCompileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'commons-io:commons-io'
-    testRuntimeOnly 'org.apache.logging.log4j:log4j-slf4j2-impl:2.25.3'
+    testRuntimeOnly 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0'
 }
 
 

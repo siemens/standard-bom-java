@@ -69,6 +69,8 @@ jobs:
                   GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
                   GIT_COMMITTER_NAME: github-actions[bot]
               run: |
+                  git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
                   VERSION_TAG="${GITHUB_REF_NAME}"
                   PAGES_DIR="${RUNNER_TEMP}/gh-pages"
 

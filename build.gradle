@@ -226,8 +226,12 @@ tasks.named('javadoc').configure {
     options.noDeprecated = true
     options.header = project.ext.publishedName + " v${project.version}"
     options.links('https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.2/',
-            'https://docs.oracle.com/javase/8/docs/api/',
-            'https://cyclonedx.github.io/cyclonedx-core-java/')
+            'https://docs.oracle.com/javase/8/docs/api/')
+    // Java 8 Javadoc needs package-list; CycloneDX publishes only element-list.
+    final File cycloneDxPackages = file('config/javadoc/cyclonedx-12.2.0')
+    inputs.file(new File(cycloneDxPackages, 'package-list'))
+    options.linksOffline('https://javadoc.io/doc/org.cyclonedx/cyclonedx-core-java/12.2.0/',
+            cycloneDxPackages.absolutePath)
     excludes = ['com/siemens/sbom/standardbom/internal/**']
 
     // javadoc does not inherit the proxy settings (https://issues.gradle.org/browse/GRADLE-1228)

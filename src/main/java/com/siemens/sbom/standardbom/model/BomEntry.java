@@ -23,6 +23,7 @@ import org.cyclonedx.model.Hash;
 import org.cyclonedx.model.License;
 import org.cyclonedx.model.LicenseChoice;
 import org.cyclonedx.model.OrganizationalContact;
+import org.cyclonedx.model.OrganizationalEntity;
 
 import com.siemens.sbom.standardbom.internal.ExtRefProcessor;
 import com.siemens.sbom.standardbom.internal.FileProtocolHandler;
@@ -413,6 +414,39 @@ public class BomEntry
     public void setScope(@Nullable final Component.Scope pScope)
     {
         cycloneDxComponent.setScope(pScope);
+    }
+
+
+
+    @CheckForNull
+    public OrganizationInfo getSupplier()
+    {
+        final OrganizationalEntity cdxSupplier = cycloneDxComponent.getSupplier();
+        if (cdxSupplier != null) {
+            return new OrganizationInfo(cdxSupplier.getName(), cdxSupplier.getUrls());
+        }
+        return null;
+    }
+
+
+
+    public void setSupplier(@Nullable final OrganizationInfo pSupplier)
+    {
+        setSupplier(pSupplier != null ? pSupplier.getName() : null,
+            pSupplier != null ? pSupplier.getUrls() : null);
+    }
+
+
+
+    public void setSupplier(@Nullable final String pName, @Nullable final List<String> pUrls)
+    {
+        OrganizationalEntity cdxSupplier = null;
+        if (pName != null || (pUrls != null && !pUrls.isEmpty())) {
+            cdxSupplier = new OrganizationalEntity();
+            cdxSupplier.setName(pName);
+            cdxSupplier.setUrls(pUrls);
+        }
+        cycloneDxComponent.setSupplier(cdxSupplier);
     }
 
 

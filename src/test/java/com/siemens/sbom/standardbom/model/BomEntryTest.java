@@ -4,6 +4,7 @@
  */
 package com.siemens.sbom.standardbom.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ import org.cyclonedx.model.ExternalReference;
 import org.cyclonedx.model.Hash;
 import org.cyclonedx.model.License;
 import org.cyclonedx.model.OrganizationalContact;
+import org.cyclonedx.model.OrganizationalEntity;
 import org.cyclonedx.model.Property;
 import org.junit.Assert;
 import org.junit.Test;
@@ -346,5 +348,55 @@ public class BomEntryTest
         Assert.assertEquals(3, actualAuthors.size());
         Assert.assertEquals(author1,
             actualAuthors.stream().filter(a -> a.getName().equals("author1")).findFirst().orElse(null));
+    }
+
+
+
+    @Test
+    public void testSupplier()
+    {
+        final BomEntry underTest = new BomEntry();
+        Assert.assertNull(underTest.getSupplier());
+
+        final List<String> urls = Arrays.asList("https://example.com", "https://docs.example.com");
+        underTest.setSupplier(new OrganizationInfo("SomeOrg", urls));
+        OrganizationInfo supplier = underTest.getSupplier();
+        Assert.assertNotNull(supplier);
+        Assert.assertEquals("SomeOrg", supplier.getName());
+        Assert.assertEquals(urls, supplier.getUrls());
+
+        final OrganizationalEntity cdxSupplier = underTest.getCycloneDxComponent().getSupplier();
+        Assert.assertNotNull(cdxSupplier);
+        Assert.assertEquals("SomeOrg", cdxSupplier.getName());
+        Assert.assertEquals(urls, cdxSupplier.getUrls());
+
+        underTest.setSupplier("OtherOrg", null);
+        supplier = underTest.getSupplier();
+        Assert.assertNotNull(supplier);
+        Assert.assertEquals("OtherOrg", supplier.getName());
+        Assert.assertNull(supplier.getUrls());
+
+        underTest.setSupplier(null, Collections.singletonList("https://docs.example.com"));
+        supplier = underTest.getSupplier();
+        Assert.assertNotNull(supplier);
+        Assert.assertNull(supplier.getName());
+        Assert.assertEquals(Collections.singletonList("https://docs.example.com"), supplier.getUrls());
+    }
+
+
+
+    @Test
+    public void testClearSupplier()
+    {
+        final BomEntry underTest = new BomEntry();
+        for (OrganizationInfo supplier : Arrays.asList(null, new OrganizationInfo(null),
+            new OrganizationInfo(null, Collections.emptyList()))) {
+            underTest.setSupplier("SomeOrg", Collections.singletonList("https://example.com"));
+            Assert.assertNotNull(underTest.getSupplier());
+
+            underTest.setSupplier(supplier);
+            Assert.assertNull(underTest.getSupplier());
+            Assert.assertNull(underTest.getCycloneDxComponent().getSupplier());
+        }
     }
 }

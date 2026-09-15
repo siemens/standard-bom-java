@@ -1,6 +1,6 @@
 # CycloneDX Javadoc Package List
 
-`package-list` is copied from <https://javadoc.io/doc/org.cyclonedx/cyclonedx-core-java/12.2.0/element-list>.
+`package-list` is copied from <https://javadoc.io/doc/org.cyclonedx/cyclonedx-core-java/13.2.0/element-list>.
 This non-modular index contains only package names, so no conversion is needed beyond the filename.
 
 Java 8 Javadoc requires `package-list` for external linking. Using this local index with `linksOffline` restores

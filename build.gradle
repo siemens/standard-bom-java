@@ -67,13 +67,13 @@ project.gradle.taskGraph.whenReady { taskGraph ->
  */
 dependencies {
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    api 'org.cyclonedx:cyclonedx-core-java:12.2.0'
-    implementation 'org.slf4j:slf4j-api:2.0.18'
+    api 'org.cyclonedx:cyclonedx-core-java:13.2.0'
+    implementation 'org.slf4j:slf4j-api:2.0.19'
 
     testCompileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'commons-io:commons-io'
-    testRuntimeOnly 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0'
+    testImplementation 'commons-io:commons-io:2.22.0'
+    testRuntimeOnly 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1'
 }
 
 
@@ -228,9 +228,9 @@ tasks.named('javadoc').configure {
     options.links('https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.2/',
             'https://docs.oracle.com/javase/8/docs/api/')
     // Java 8 Javadoc needs package-list; CycloneDX publishes only element-list.
-    final File cycloneDxPackages = file('config/javadoc/cyclonedx-12.2.0')
+    final File cycloneDxPackages = file('config/javadoc/cyclonedx-13.2.0')
     inputs.file(new File(cycloneDxPackages, 'package-list'))
-    options.linksOffline('https://javadoc.io/doc/org.cyclonedx/cyclonedx-core-java/12.2.0/',
+    options.linksOffline('https://javadoc.io/doc/org.cyclonedx/cyclonedx-core-java/13.2.0/',
             cycloneDxPackages.absolutePath)
     excludes = ['com/siemens/sbom/standardbom/internal/**']
 

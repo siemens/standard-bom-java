@@ -306,6 +306,10 @@ publishing {
                                 project.version + '/LICENSE'
                     }
                 }
+                organization {
+                    name = 'Siemens or its Affiliates'
+                    url = 'https://opensource.siemens.com'
+                }
                 developers {
                     developer {
                         name = 'Thomas Jensen'
@@ -316,7 +320,7 @@ publishing {
                 scm {
                     connection = 'scm:git:' + ga
                     developerConnection = 'scm:git:' + ga
-                    url = 'https://github.com/siemens/standard-bom-java'
+                    url = rootProject.ext.codeRepo
                 }
             }
         }
